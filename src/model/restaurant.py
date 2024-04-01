@@ -1,14 +1,21 @@
 from datetime import time
 from enum import Enum
 import json
+from meal import Meal
+from daily_data import DailyData
 
-class Meal: pass
+class Weekday(Enum): 
+    SUNDAY = 1
+    MONDAY = 2
+    TUESDAY = 3
+    WEDNESDAY = 4
+    THURSDAY = 5
+    FRIDAY = 6
+    SATURDAY = 7
 
-class WeekDay(Enum): 
-    MONDAY = "Segunda-feira"
-
-class Period(Enum): 
-    LUNCH = "Almoço"
+class Period(Enum):
+    LUNCH = 1
+    DINNER = 2
 
 class Storable:
     @property
@@ -42,7 +49,7 @@ class Restaurant(Storable):
                 period : Meal()
                 for period in Period
             }
-            for day in WeekDay
+            for day in Weekday
         }
 
     def json(self) -> str:
@@ -62,7 +69,7 @@ class Restaurant(Storable):
     # GETTERS
 
     def get_meal(self, 
-                 day : WeekDay,
+                 day : Weekday,
                  period : Period):
         return self.week_meals[day][period] 
     
@@ -90,7 +97,7 @@ class Restaurant(Storable):
      
     @Persistance.setter
     def set_meal(self, 
-                   day : WeekDay,
+                   day : Weekday,
                    period : Period,
                    meal : Meal):
         self.week_meals[day][period] = meal
