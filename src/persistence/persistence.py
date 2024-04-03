@@ -1,26 +1,34 @@
-from collections import namedtuple
-from abc import ABC, abstractmethod
-import json
+from model.restaurant import Restaurant
+from model.edible import Edible
+from model.util import TypeException
 
 class Persistence:
-    def __init__(self, 
-                 target_class):
-        self.cls = target_class
+    __database = None
 
-    def get_class(self) -> object:
-        data = self.load()
-        return self.cls(*json.loads(data).values())
-        
-    @abstractmethod
-    @staticmethod
-    def load() -> str: pass
+    def __init__(self,
+                 cls : type,
+                 collection : str):
+        self.__cls = cls
+        self.__collection = collection
 
-    @abstractmethod
-    @staticmethod
-    def save(): pass
+    def create(self, obj : object):
+        TypeException.check_type(obj, self.get_cls())
+        # database[self.get_collection()].insert_one(obj.__dict__)
 
-class Restaurant: pass
+    def search(self, obj : object): ...
+
+    def delete(self, obj : object): ...
+
+    def get_cls(self) -> type:
+        return self.__cls
+    
+    def get_collection(self) -> str:
+        return self.__collection
 
 class RestaurantPersistence(Persistence):
     def __init__(self):
-        super().__init__(Restaurant)
+        super().__init__(Restaurant, "restaurant")
+
+class EdiblePersistence(Persistence):
+    def __init__(self):
+        super().__init__(Edible, "edible")
