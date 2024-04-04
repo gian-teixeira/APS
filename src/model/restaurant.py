@@ -1,4 +1,4 @@
-from util import TypeException
+from model.util import TypeException
 from datetime import time
 
 class Restaurant:

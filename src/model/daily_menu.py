@@ -1,6 +1,6 @@
-from edible import Edible
-from restaurant import Restaurant
-from util import TypeException
+from model.edible import Edible
+from model.restaurant import Restaurant
+from model.util import TypeException
 
 class DailyMenu:
     def __init__(self):
