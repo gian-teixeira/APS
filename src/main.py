@@ -7,4 +7,16 @@ class User:
 
 tmp = Collection("tmp")
 
-tmp.save()
+tmp.insert({
+    "name": "Gian",
+    "age": 21
+})
+
+tmp.delete({
+    "name": "Gian",
+    "age": 20
+})
+
+print(tmp.find({
+    "name": "Gian"
+}))
