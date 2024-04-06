@@ -3,4 +3,4 @@ from model.edible import Edible
 
 class EdiblePersistence(Persistence):
     def __init__(self):
-        super().__init__(Edible, "edible")
+        super().__init__("edible")

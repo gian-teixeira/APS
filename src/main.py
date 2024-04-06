@@ -1,22 +1,7 @@
-from persistence.collection import Collection
+from persistence.persistence import Persistence
+from sys import argv
 
-class User:
-    def __init__(self, name, age):
-        self.name = name
-        self.age = age
-
-tmp = Collection("tmp")
-
-tmp.insert({
-    "name": "Gian",
-    "age": 21
-})
-
-tmp.delete({
-    "name": "Gian",
-    "age": 20
-})
-
-print(tmp.find({
-    "name": "Gian"
-}))
+if __name__ == "__main__":
+    database_folder = argv[1]
+    print(database_folder)
+    Persistence.set_database_folder(database_folder)

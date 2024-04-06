@@ -1,7 +1,7 @@
-from persistence import Persistence
+from persistence.persistence import Persistence
 from model.restaurant import Restaurant
 
 class RestaurantPersistence(Persistence):
     def __init__(self):
-        super().__init__(Restaurant, "restaurant")
+        super().__init__("restaurant")
     

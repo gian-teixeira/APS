@@ -12,11 +12,14 @@ class EdibleController(Controller):
 
     def search_by_name(self, 
                        name : str) -> object:
-        data = {
+        TypeException.check_type(name, str)
+        return self.search({
             "name" : name
-        }
-        self.__persistence.search(data)
-
+        })
+    
     def delete_by_name(self,
                        name : str):
-        pass
+        TypeException.check_type(name, str)
+        self.__persistence.delete({
+            "name" : name
+        })

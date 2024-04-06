@@ -11,12 +11,15 @@ class DailyMenuController(Controller):
         super().__init__(persistence, DailyMenu)
     
     def search_by_date(self, 
-                       date : date) -> object:
-        data = {
-            "date" : DateTime.date_string(date)
-        }
-        self.__persistence.search(data)
+                       value : date) -> object:
+        TypeException.check_type(value, date)
+        return self.search({
+            "date" : DateTime.date_string(value)
+        })
 
     def delete_by_date(self, 
-                       date : date):
-        pass
+                       value : date):
+        TypeException.check_type(value, date)
+        self.__persistence.delete({
+            "date" : DateTime.date_string(value)
+        })
