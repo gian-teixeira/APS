@@ -1,11 +1,17 @@
+from view.search import SearchPanel
+from control.controller import Controller
 import tkinter as tk
 from tkinter import ttk, font as tk_font
 
 class Panel(tk.Frame):
     def __init__(self,
-                 name : str):
+                 name : str,
+                 controller : Controller,
+                 search_callback):
         super().__init__()
         self.__name = name
+        self.__controller = controller
+        self.__search_callback = search_callback
         
         title = ttk.Label(self, text = self.__name, font = tk_font.BOLD)
         sep = ttk.Separator(self, orient = tk.HORIZONTAL)
@@ -20,8 +26,13 @@ class Panel(tk.Frame):
 
         for tab_name in tab_names:
             frame = tk.Frame(tabs[tab_name])
+            search = SearchPanel(self.__controller.search_requests(),
+                                 self.__search_callback)
+            search.pack(in_ = frame)
             frame.pack(expand = True, fill = tk.BOTH)
 
         title.pack(fill = tk.BOTH)
         sep.pack(fill = tk.X)
         tab_controller.pack(expand = True, fill = tk.BOTH)
+
+

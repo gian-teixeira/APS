@@ -23,3 +23,6 @@ class EdibleController(Controller):
         self.__persistence.delete({
             "name" : name
         })
+
+    def search_requests(self):
+        return { "Nome" }

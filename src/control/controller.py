@@ -11,13 +11,12 @@ class Controller(dict):
     def save(self, 
              obj : object):
         TypeException.check_type(obj, self.__cls)
-
         self.__persistence.register(obj.__dict__)
 
     def search(self,
                data : dict):
         TypeException.check_type(data, dict)
-        
         valid_info = self.__persistence.find(data)
-        
         return [self.__cls(*info.values()) for info in valid_info]
+    
+    def search_requests(self): ...

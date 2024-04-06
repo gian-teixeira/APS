@@ -23,3 +23,6 @@ class DailyMenuController(Controller):
         self.__persistence.delete({
             "date" : DateTime.date_string(value)
         })
+
+    def search_requests(self):
+        return { "Data" }
