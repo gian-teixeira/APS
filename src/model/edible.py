@@ -8,3 +8,8 @@ class Edible:
     
     def __str__(self) -> str:
         return self.get_name()
+     
+    def to_dict(self):
+        return {
+            "name" : self.get_name()
+        }

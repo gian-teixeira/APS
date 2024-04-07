@@ -11,7 +11,7 @@ class EdibleController(Controller):
         super().__init__(persistence, Edible)
 
     def search_by_name(self, 
-                       name : str) -> object:
+                       name : str):
         TypeException.check_type(name, str)
         return self.search({
             "name" : name
@@ -20,9 +20,12 @@ class EdibleController(Controller):
     def delete_by_name(self,
                        name : str):
         TypeException.check_type(name, str)
-        self.__persistence.delete({
+        self.delete({
             "name" : name
         })
 
-    def search_requests(self):
-        return { "Nome" }
+    def search_field(self):
+        return ("Nome", self.search_by_name)
+    
+    def delete_fuction(self):
+        return self.delete_by_name

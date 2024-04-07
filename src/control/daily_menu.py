@@ -11,7 +11,7 @@ class DailyMenuController(Controller):
         super().__init__(persistence, DailyMenu)
     
     def search_by_date(self, 
-                       value : date) -> object:
+                       value : date):
         TypeException.check_type(value, date)
         return self.search({
             "date" : DateTime.date_string(value)
@@ -24,5 +24,8 @@ class DailyMenuController(Controller):
             "date" : DateTime.date_string(value)
         })
 
-    def search_requests(self):
-        return { "Data" }
+    def search_field(self):
+        return ("Data", self.search_by_date)
+    
+    def delete_fuction(self, value):
+        return self.delete_by_date

@@ -14,11 +14,21 @@ class Persistence:
     def register(self, data : dict):
         TypeException.check_type(data, dict)
 
+        self.__load()
+
+        filter_items = set(data.items())
+        found = [item for item in self.__data["items"] 
+                 if set(item.items()).issuperset(filter_items)]
+        
+        if len(found): raise Exception
+
         self.__data["items"].append(data)
         self.__save()
 
     def delete(self, data : dict):
         TypeException.check_type(data, dict)
+
+        self.__load()
 
         targets = self.find(data)
 
@@ -27,7 +37,8 @@ class Persistence:
             del self.__data["items"][index]
 
         self.__save()
-
+    
+    # TODO : pesquisar com substring
     def find(self, filter : dict) -> list[dict]:
         TypeException.check_type(filter, dict)
 

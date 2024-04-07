@@ -1,6 +1,8 @@
 from persistence.persistence import Persistence
 from persistence.edible import EdiblePersistence
 from control.edible import EdibleController
+from view.edible.panel import EdiblePanel
+from view.view import View
 from sys import argv
 
 import tkinter as tk
@@ -11,15 +13,16 @@ if __name__ == "__main__":
     print(database_folder)
     Persistence.set_database_folder(database_folder)
 
-    root = tk.Tk()
+    root = View()
     persistence = EdiblePersistence()
     controller = EdibleController(persistence)
+
+    print(controller.delete_by_name)
 
     #persistence.register({ "name" : "arroz" })
     #persistence.register({ "name" : "feijão" })
 
-    panel = Panel("Comida", controller, controller.search_by_name)
-    panel.pack(in_ = root, expand = True, fill = tk.BOTH,
-               padx = 10, pady = 10)
+    #panel = EdiblePanel()
+    #panel.pack(in_ = root, expand = True, fill = tk.BOTH, padx = 10, pady = 10)
 
     root.mainloop()

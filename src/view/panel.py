@@ -1,17 +1,15 @@
-from view.search import SearchPanel
+from view.edible.search import EdibleSearch
 from control.controller import Controller
+
 import tkinter as tk
 from tkinter import ttk, font as tk_font
-
+        
 class Panel(tk.Frame):
     def __init__(self,
                  name : str,
-                 controller : Controller,
-                 search_callback):
+                 controller : Controller):
         super().__init__()
         self.__name = name
-        self.__controller = controller
-        self.__search_callback = search_callback
         
         title = ttk.Label(self, text = self.__name, font = tk_font.BOLD)
         sep = ttk.Separator(self, orient = tk.HORIZONTAL)
@@ -26,9 +24,9 @@ class Panel(tk.Frame):
 
         for tab_name in tab_names:
             frame = tk.Frame(tabs[tab_name])
-            search = SearchPanel(self.__controller.search_requests(),
-                                 self.__search_callback)
-            search.pack(in_ = frame)
+            print("DELETE FUNCTION", controller.delete_function())
+            search = EdibleSearch()
+            search.pack(in_ = frame, expand = True, anchor = 'nw')
             frame.pack(expand = True, fill = tk.BOTH)
 
         title.pack(fill = tk.BOTH)
