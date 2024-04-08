@@ -56,7 +56,9 @@ class EdibleSearch(ttk.Frame):
             if self.__card is not None:
                 self.__card.destroy()
 
-            card = Card("Card", selected.to_dict(), self.delete)
+            fields = dict(zip(selected.attr_labels(), selected.to_dict().values()))
+
+            card = Card("Comida", fields, self.delete)
             card.pack(in_ = self.__right, expand = True, ipadx = 10, ipady = 10)
             self.__card = card
 

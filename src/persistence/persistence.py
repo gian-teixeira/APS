@@ -16,11 +16,11 @@ class Persistence:
 
         self.__load()
 
-        filter_items = set(data.items())
-        found = [item for item in self.__data["items"] 
-                 if set(item.items()).issuperset(filter_items)]
+        #filter_items = set(data.items())
+        #found = [item for item in self.__data["items"] 
+        #         if set(item.items()).issuperset(filter_items)]
         
-        if len(found): raise Exception
+        #if len(found): raise Exception
 
         self.__data["items"].append(data)
         self.__save()
@@ -59,14 +59,15 @@ class Persistence:
             with open(filename, "r") as file:
                 self.__data = json.loads(file.read())
         except:
-            raise IOError("Collection load : TODO")
+            raise IOError("Collection load : Icompatible file format")
     
     def __save(self):
         try:
             filename : str = self.__filename()
             with open(filename, "w") as file:
                 file.write(json.dumps(self.__data))
-        except:
+        except IOError as io_error:
+            print(io_error)
             raise IOError("Collection save : TODO")
 
     def __filename(self) -> str:

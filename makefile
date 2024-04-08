@@ -1,4 +1,4 @@
-build:
+install:
 	pipenv install
 
 run:

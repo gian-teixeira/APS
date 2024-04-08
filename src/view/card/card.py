@@ -21,7 +21,7 @@ class Card(ttk.Frame):
             value.pack(expand = True, side = tk.RIGHT)
             line.pack(expand = True)
 
-        delete_button = ttk.Button(self, text = "🗑", command = self.__delete)
+        delete_button = ttk.Button(self, text = "Apagar", command = self.__delete)
         delete_button.pack(pady = 10)
 
     def __delete(self):
