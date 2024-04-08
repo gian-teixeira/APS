@@ -14,7 +14,7 @@ class Controller(dict):
         self.__persistence.register(obj.to_dict())
 
     def search(self,
-               data : dict):
+               data : dict = {}):
         TypeException.check_type(data, dict)
         valid_info = self.__persistence.find(data)
         return [self.__cls(*info.values()) for info in valid_info]
