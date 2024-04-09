@@ -32,4 +32,7 @@ class Restaurant:
         TypeException.check_type(name, str)
         self.__name = name
     
-    
+    def set_operating_time(self,
+                           operating_time : tuple[time,time]):
+        TypeException.check_type(operating_time, tuple[time,time])
+        self.__operating_time = operating_time
