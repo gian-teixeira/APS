@@ -9,26 +9,20 @@ class Persistence:
                  name : str):
         self.__name : str = name
         self.__data : dict
-        self.__load()
+        self.load()
         
     def register(self, data : dict):
         TypeException.check_type(data, dict)
 
-        self.__load()
-
-        #filter_items = set(data.items())
-        #found = [item for item in self.__data["items"] 
-        #         if set(item.items()).issuperset(filter_items)]
-        
-        #if len(found): raise Exception
+        self.load()
 
         self.__data["items"].append(data)
-        self.__save()
+        self.save()
 
     def delete(self, data : dict):
         TypeException.check_type(data, dict)
 
-        self.__load()
+        self.load()
 
         targets = self.find(data)
 
@@ -36,13 +30,13 @@ class Persistence:
             index = self.__data["items"].index(target)
             del self.__data["items"][index]
 
-        self.__save()
+        self.save()
     
-    # TODO : pesquisar com substring
-    def find(self, filter : dict) -> list[dict]:
-        TypeException.check_type(filter, dict)
+    def find(self, filter = None):
+        self.load()
 
-        self.__load()
+        if filter is None:
+            return self.__data["items"]
 
         filter_items = set(filter.items())
         found = [item for item in self.__data["items"] 
@@ -50,46 +44,49 @@ class Persistence:
 
         return found
     
-    def __load(self):
-        if not path.isfile(self.__filename()):
-            self.__create()
+    def load(self):
+        if not path.isfile(self.filename()):
+            self.create()
         
         try:
-            filename : str = self.__filename()
+            filename : str = self.filename()
             with open(filename, "r") as file:
                 self.__data = json.loads(file.read())
         except:
             raise IOError("Collection load : Icompatible file format")
     
-    def __save(self):
+    def save(self):
         try:
-            filename : str = self.__filename()
+            filename : str = self.filename()
             with open(filename, "w") as file:
                 file.write(json.dumps(self.__data))
         except IOError as io_error:
             print(io_error)
             raise IOError("Collection save : TODO")
 
-    def __filename(self) -> str:
+    def filename(self) -> str:
         return f"{self.__folder}/{self.get_name()}.json"
     
-    def __create(self):
-        filename : str = self.__filename()
+    def create(self):
+        filename : str = self.filename()
         with open(filename, "w+") as file:
             file.write(json.dumps({
                 "items": []
             }))
     
     def __dict__(self):
-        self.__load()
+        self.load()
         return self.__data
 
     def __getitem__(self, item):
-        self.__load()
+        self.load()
         return self.__data[item]
 
     def get_name(self):
         return self.__name
+    
+    def get_data(self):
+        return self.__data
     
     @classmethod
     def set_database_folder(cls, 

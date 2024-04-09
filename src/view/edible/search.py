@@ -49,6 +49,10 @@ class EdibleSearch(ttk.Frame):
     def selection_callback(self):
         def callback(event):
             widget = event.widget
+            
+            if len(widget.curselection()) == 0:
+                return
+
             index = int(widget.curselection()[0])
             self.__selected_name = widget.get(index)
             selected = self.__search_result[index]

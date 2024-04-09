@@ -5,27 +5,21 @@ from model.util import TypeException
 from model.edible import Edible
 
 class EdibleController(Controller):
-    def __init__(self, 
-                 persistence : EdiblePersistence):
+    def __init__(self, persistence):
         TypeException.check_type(persistence, EdiblePersistence)
         super().__init__(persistence, Edible)
 
-    def search_by_name(self, 
-                       name : str):
+    def search_by_name(self, name):
         TypeException.check_type(name, str)
         return self.search({
             "name" : name
         })
     
-    def delete_by_name(self,
-                       name : str):
+    def delete_by_name(self, name):
         TypeException.check_type(name, str)
         self.delete({
             "name" : name
         })
 
-    def search_field(self):
-        return ("Nome", self.search_by_name)
-    
-    def delete_fuction(self):
-        return self.delete_by_name
+    def build_object(self, data):
+        return Edible(*data.values())

@@ -1,31 +1,41 @@
 from persistence.daily_menu import DailyMenuPersistence
+from persistence.edible import EdiblePersistence
+from control.edible import EdibleController
 from control.controller import Controller
 from model.util import DateTime, TypeException
 from model.daily_menu import DailyMenu
 from datetime import date
 
 class DailyMenuController(Controller):
-    def __init__(self, 
-                 persistence : DailyMenuPersistence):
+    def __init__(self, persistence):
         TypeException.check_type(persistence, DailyMenuPersistence)
         super().__init__(persistence, DailyMenu)
     
-    def search_by_date(self, 
-                       value : date):
-        TypeException.check_type(value, date)
+    def search_by_date(self, value):
         return self.search({
-            "date" : DateTime.date_string(value)
+            "date" : value
         })
 
-    def delete_by_date(self, 
-                       value : date):
-        TypeException.check_type(value, date)
-        self.__persistence.delete({
-            "date" : DateTime.date_string(value)
+    def delete_by_date(self, value):
+        self.persistence.delete({
+            "date" : value
         })
 
-    def search_field(self):
-        return ("Data", self.search_by_date)
-    
-    def delete_fuction(self, value):
-        return self.delete_by_date
+    def build_object(self, data):
+        edible_persistence = EdiblePersistence()
+        edible_controller = EdibleController(edible_persistence)
+
+        menu = DailyMenu(data["date"])
+        menu.set_price(data["price"])
+        
+        for edible_name in data["lunch"]:
+            edible = edible_controller.search_by_name(edible_name)
+            menu.lunch_add(edible)
+
+        for edible_name in data["dinner"]:
+            edible = edible_controller.search_by_name(edible_name)
+            menu.dinner_add(edible)
+
+        return menu
+            
+        

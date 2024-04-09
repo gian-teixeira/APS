@@ -1,28 +1,23 @@
 from persistence.persistence import Persistence
 from model.util import TypeException
+from abc import ABC, abstractmethod
 
-class Controller(dict):
-    def __init__(self, 
-                 persistence : Persistence,
-                 cls : type):
-        self.__persistence = persistence
+class Controller(dict, ABC):
+    def __init__(self, persistence, cls):
+        self.persistence = persistence
         self.__cls = cls
 
-    def save(self, 
-             obj):
+    def save(self, obj):
+        print(self.__cls)
         TypeException.check_type(obj, self.__cls)
-        self.__persistence.register(obj.to_dict())
+        self.persistence.register(obj.to_dict())
 
-    def search(self,
-               data : dict = {}):
-        TypeException.check_type(data, dict)
-        valid_info = self.__persistence.find(data)
-        return [self.__cls(*info.values()) for info in valid_info]
+    def search(self, data = None):
+        valid_info = self.persistence.find(data)
+        return [self.build_object(info) for info in valid_info]
     
-    def delete(self,
-               data : dict):
-        self.__persistence.delete(data)
-    
-    def search_field(self): ...
-    def register_fields(self): ...
-    def delete_function(self): ...
+    def delete(self, data):
+        self.persistence.delete(data)
+
+    @abstractmethod
+    def build_object(self, data): ...

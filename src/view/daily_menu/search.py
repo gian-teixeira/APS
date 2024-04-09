@@ -17,11 +17,11 @@ class DailyMenuSearch(ttk.Frame):
         self.__controller = DailyMenuController(self.__persistence)
 
         self.__card = None
-        self.__selected_name = ""
+        self.__selected_date = ""
 
         self.__right = ttk.Frame(self)
         self.__left = ttk.Frame(self)
-        self.__entry = Entry("Data")
+        self.__date_entry = Entry("Data")
         self.__confirm_button = ttk.Button(self.__left, text = "Buscar", command = self.confirm)
         self.__response_list = tk.Listbox(self.__left, highlightthickness = 0)
         self.__response_scroll = tk.Scrollbar(self.__left)
@@ -32,30 +32,31 @@ class DailyMenuSearch(ttk.Frame):
 
         self.__left.pack(expand = True, side = tk.TOP, padx = 10, pady = 10)
         self.__right.pack(expand = True, side = tk.BOTTOM, padx = 10, pady = 10)
-        self.__entry.pack(in_ = self.__left)
+        self.__date_entry.pack(in_ = self.__left)
         self.__confirm_button.pack(pady = 10)
         self.__response_list.pack(side = tk.LEFT, fill = tk.X)
         self.__response_scroll.pack(side = tk.RIGHT, fill = tk.Y)
 
     def confirm(self):
-        date_str = self.__entry.get_content()
-        date = datetime.strptime(date_str, self.__date_format)
-        print(date)
-        #self.__search_result = self.__controller.search_by_date(menu_date)
-        #self.__response_list.delete(0, tk.END)
-        #for value in self.__search_result:
-        #    self.__response_list.insert(tk.END, str(value))
+        date = self.__date_entry.get_content()
+        self.__search_result = self.__controller.search_by_date(date)
+        self.__response_list.delete(0, tk.END)
+        for value in self.__search_result:
+            self.__response_list.insert(tk.END, str(value))
 
     def delete(self):
-        print(self.__selected_name)
-        self.__controller.delete_by_name(self.__selected_name)
+        self.__controller.delete_by_date(self.__selected_date)
         self.confirm()
 
     def selection_callback(self):
         def callback(event):
             widget = event.widget
+
+            if len(widget.curselection()) == 0:
+                return
+            
             index = int(widget.curselection()[0])
-            self.__selected_name = widget.get(index)
+            self.__selected_date = widget.get(index)
             selected = self.__search_result[index]
 
             if self.__card is not None:
