@@ -40,7 +40,7 @@ class Restaurant:
     def to_dict(self):
         return {
             "name" : self.get_name(),
-            "time" : " | ".join(self.get_operating_time()),
+            "time" : self.get_operating_time(),
             "price" : self.get_price()
         }
     
