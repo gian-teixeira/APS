@@ -1,4 +1,4 @@
-from model.util import TypeException
+from util.util import TypeException
 from os import path
 import json
 

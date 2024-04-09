@@ -1,5 +1,5 @@
 from model.edible_type import EdibleType
-from model.util import TypeException
+from util.util import TypeException
 
 class Edible:
     def __init__(self, 

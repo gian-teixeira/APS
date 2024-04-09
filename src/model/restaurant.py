@@ -1,4 +1,4 @@
-from model.util import TypeException
+from util.util import TypeException
 from datetime import time
 
 class Restaurant:
@@ -22,19 +22,15 @@ class Restaurant:
     def get_operating_time(self):
         return self.__operating_time
     
-    def set_price(self, 
-                  price : float):
+    def set_price(self, price):
         TypeException.check_type(price, float)
         self.__price = price
 
-    def set_name(self,
-                 name : str):
+    def set_name(self, name):
         TypeException.check_type(name, str)
         self.__name = name
     
-    def set_operating_time(self,
-                           operating_time):
-        #TypeException.check_type(operating_time, tuple[time,time])
+    def set_operating_time(self, operating_time):
         self.__operating_time = operating_time
 
     def to_dict(self):

@@ -1,5 +1,5 @@
 from persistence.persistence import Persistence
-from model.util import TypeException
+from util.util import TypeException
 from abc import ABC, abstractmethod
 
 class Controller(dict, ABC):

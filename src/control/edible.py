@@ -1,7 +1,7 @@
 from control.controller import Controller
 from persistence.edible import EdiblePersistence
 from persistence.edible import EdiblePersistence
-from model.util import TypeException
+from util.util import TypeException
 from model.edible import Edible
 
 class EdibleController(Controller):

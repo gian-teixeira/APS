@@ -2,7 +2,7 @@ from persistence.daily_menu import DailyMenuPersistence
 from persistence.edible import EdiblePersistence
 from control.edible import EdibleController
 from control.controller import Controller
-from model.util import DateTime, TypeException
+from util.util import DateTime, TypeException
 from model.daily_menu import DailyMenu
 from datetime import date
 

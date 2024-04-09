@@ -1,7 +1,7 @@
 from persistence.edible import EdiblePersistence
 from control.edible import EdibleController
 from view.entry import Entry
-from view.card.card import Card
+from view.card import Card
 
 import tkinter as tk
 from tkinter import ttk

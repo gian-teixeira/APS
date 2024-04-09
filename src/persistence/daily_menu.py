@@ -1,6 +1,6 @@
 from persistence.persistence import Persistence
 from model.daily_menu import DailyMenu
-from model.util import TypeException
+from util.util import TypeException
 
 class DailyMenuPersistence(Persistence):
     def __init__(self):

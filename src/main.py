@@ -19,10 +19,4 @@ if __name__ == "__main__":
 
     print(controller.delete_by_name)
 
-    #persistence.register({ "name" : "arroz" })
-    #persistence.register({ "name" : "feijão" })
-
-    #panel = EdiblePanel()
-    #panel.pack(in_ = root, expand = True, fill = tk.BOTH, padx = 10, pady = 10)
-
     root.mainloop()

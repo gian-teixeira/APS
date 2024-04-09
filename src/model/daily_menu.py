@@ -1,6 +1,6 @@
 from model.edible import Edible
 from model.restaurant import Restaurant
-from model.util import TypeException
+from util.util import TypeException
 
 class DailyMenu:
     def __init__(self, date):
@@ -10,13 +10,6 @@ class DailyMenu:
         self.__lunch : list[Edible] = []
         self.__dinner : list[Edible] = []
         self.__date = date
-
-    @staticmethod
-    def add_edible(target_list : list[Edible], 
-                   edibles : list[Edible]):
-        for edible in edibles:
-            TypeException.check_type(edible, Edible)
-        target_list += edibles
 
     def lunch_add(self, edible):
         self.__lunch += edible

@@ -3,7 +3,7 @@ from control.restaurant import RestaurantController
 from model.restaurant import Restaurant
 from view.entry import Entry
 from view.selector import Selector
-from view.card.card import Card
+from view.card import Card
 
 import tkinter as tk
 from tkinter import ttk

@@ -1,7 +1,7 @@
 from persistence.daily_menu import DailyMenuPersistence
 from control.daily_menu import DailyMenuController
 from view.entry import Entry
-from view.card.card import Card
+from view.card import Card
 
 from datetime import datetime
 import tkinter as tk
