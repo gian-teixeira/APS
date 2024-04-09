@@ -4,7 +4,7 @@ from tkinter import ttk
 class Entry(tk.Frame):
     def __init__(self, 
                  label_text):
-        super().__init__(background = "red")
+        super().__init__()
         self.__content = tk.StringVar()
         
         label = ttk.Label(self, text = label_text)

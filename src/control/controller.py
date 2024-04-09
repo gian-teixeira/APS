@@ -8,7 +8,6 @@ class Controller(dict, ABC):
         self.__cls = cls
 
     def save(self, obj):
-        print(self.__cls)
         TypeException.check_type(obj, self.__cls)
         self.persistence.register(obj.to_dict())
 

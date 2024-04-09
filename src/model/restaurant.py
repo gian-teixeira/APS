@@ -3,9 +3,9 @@ from datetime import time
 
 class Restaurant:
     __instance = None
-    __price : float = 0
-    __name : str = ""
-    __operating_time : tuple[time,time] = (time(), time()) # TODO
+    __price = 0
+    __name = ""
+    __operating_time = ("", "")
     
     @classmethod
     def get_instance(cls):
@@ -13,13 +13,13 @@ class Restaurant:
             cls.__instance = cls()
         return cls.__instance
     
-    def get_price(self) -> float:
+    def get_price(self):
         return self.__price
     
-    def get_name(self) -> str:
+    def get_name(self):
         return self.__name
     
-    def get_operating_time(self) -> tuple[time,time]:
+    def get_operating_time(self):
         return self.__operating_time
     
     def set_price(self, 
@@ -33,6 +33,16 @@ class Restaurant:
         self.__name = name
     
     def set_operating_time(self,
-                           operating_time : tuple[time,time]):
-        TypeException.check_type(operating_time, tuple[time,time])
+                           operating_time):
+        #TypeException.check_type(operating_time, tuple[time,time])
         self.__operating_time = operating_time
+
+    def to_dict(self):
+        return {
+            "name" : self.get_name(),
+            "time" : " | ".join(self.get_operating_time()),
+            "price" : self.get_price()
+        }
+    
+    def attr_labels(self):
+        return ("Nome", "Tempo de Funcionamento", "Preço")

@@ -20,7 +20,7 @@ class Persistence:
         self.save()
 
     def delete(self, data : dict):
-        TypeException.check_type(data, dict)
+        #TypeException.check_type(data, dict)
 
         self.load()
 
