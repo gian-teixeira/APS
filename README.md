@@ -16,3 +16,5 @@ python 3.11
 libs:
     - tkinter
 ```
+
+> Os arquivos `Pipfile` permitem a utlização da ferramenta <a href="https://github.com/pyenv/pyenv">pyenv</a> para gerenciamento da versão e das dependências.
