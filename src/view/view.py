@@ -1,5 +1,6 @@
 from view.edible.panel import EdiblePanel
 from view.daily_menu.panel import DailyMenuPanel
+from view.restaurant.panel import RestaurantPanel
 
 import tkinter as tk
 from tkinter import ttk
@@ -13,11 +14,15 @@ class View(tk.Tk):
 
         self.__panels = {
             "Comida": EdiblePanel(),
-            "Cardápio": DailyMenuPanel()
+            "Cardápio": DailyMenuPanel(),
+            "Restaurante": RestaurantPanel()
         }
         self.__selected_panel = None
 
         self.__sidebar = ttk.Frame(self)
+        
+        ttk.Label(self.__sidebar, text = "RUConnect") \
+            .pack(expand = True, anchor = "n", pady = 200)
 
         for panel_id in self.__panels:
             button = ttk.Button(self.__sidebar, text = panel_id,

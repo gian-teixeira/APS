@@ -52,3 +52,9 @@ class DailyMenu:
             "lunch": [edible.get_name() for edible in self.get_lunch()],
             "dinner": [edible.get_name() for edible in self.get_dinner()],
         }
+    
+    def attr_labels(self):
+        return ("Preço", "Data", "Almoço", "Jantar")
+    
+    def __str__(self):
+        return self.get_date()

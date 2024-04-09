@@ -75,6 +75,10 @@ class DailyMenuRegister(ttk.Frame):
             menu_controller.delete_by_date(date)
         menu_controller.save(menu)
 
+        self.__data_entry.clear()
+        self.__period_selector.clear()
+
+
     def update(self):
         edible_persistence = EdiblePersistence()
         edible_controller = EdibleController(edible_persistence)
