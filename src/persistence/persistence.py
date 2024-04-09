@@ -12,16 +12,12 @@ class Persistence:
         self.load()
         
     def register(self, data : dict):
-        TypeException.check_type(data, dict)
-
         self.load()
 
         self.__data["items"].append(data)
         self.save()
 
     def delete(self, data : dict):
-        #TypeException.check_type(data, dict)
-
         self.load()
 
         targets = self.find(data)
@@ -61,7 +57,6 @@ class Persistence:
             with open(filename, "w") as file:
                 file.write(json.dumps(self.__data))
         except IOError as io_error:
-            print(io_error)
             raise IOError("Collection save : TODO")
 
     def filename(self) -> str:

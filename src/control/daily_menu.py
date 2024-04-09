@@ -8,7 +8,6 @@ from datetime import date
 
 class DailyMenuController(Controller):
     def __init__(self, persistence):
-        TypeException.check_type(persistence, DailyMenuPersistence)
         super().__init__(persistence, DailyMenu)
     
     def search_by_date(self, value):

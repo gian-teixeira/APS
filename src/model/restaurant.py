@@ -23,11 +23,9 @@ class Restaurant:
         return self.__operating_time
     
     def set_price(self, price):
-        TypeException.check_type(price, float)
         self.__price = price
 
     def set_name(self, name):
-        TypeException.check_type(name, str)
         self.__name = name
     
     def set_operating_time(self, operating_time):

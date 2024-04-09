@@ -6,7 +6,6 @@ from model.restaurant import Restaurant
 class RestaurantController(Controller):
     def __init__(self, 
                  persistence : RestaurantPersistence):
-        TypeException.check_type(persistence, RestaurantPersistence)
         super().__init__(persistence, Restaurant)
 
     def build_object(self, data):

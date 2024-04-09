@@ -42,7 +42,6 @@ class EdibleSearch(ttk.Frame):
             self.__response_list.insert(tk.END, str(value))
 
     def delete(self):
-        print(self.__selected_name)
         self.__controller.delete_by_name(self.__selected_name)
         self.confirm()
 
