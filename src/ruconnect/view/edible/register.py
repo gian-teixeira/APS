@@ -20,7 +20,7 @@ class EdibleRegister(ttk.Frame):
                                        foreground = "red",
                                        relief = tk.GROOVE,
                                        justify = 'center')
-
+        
         self.__frame = ttk.Frame(self)
         self.__name_entry = Entry("Nome")
         self.__calories_entry = Entry("Calorias")

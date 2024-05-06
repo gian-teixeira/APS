@@ -27,7 +27,7 @@ class DailyMenuRegister(ttk.Frame):
         self.left = ttk.Frame(self)
         self.data_entry = Entry("Data")
         self.period_selector = Selector("Período", ["Almoço", "Jantar"])
-        self.search = SearchBox(EdibleController(EdiblePersistence()), "Alimentos")
+        self.search = SearchBox(EdibleController(EdiblePersistence()), "Alimentos", tk.MULTIPLE)
 
 
         self.persistence = DailyMenuPersistence()
