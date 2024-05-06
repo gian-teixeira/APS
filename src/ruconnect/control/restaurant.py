@@ -20,4 +20,4 @@ class RestaurantController(Controller):
         return super().search(None)
     
     def delete(self):
-        self.persistence.delete(None)
+        super().delete(None)

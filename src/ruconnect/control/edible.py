@@ -5,15 +5,15 @@ class EdibleController(Controller):
     def __init__(self, persistence):
         super().__init__(persistence, Edible)
 
-    def search_by_name(self, name):
-        return self.search({
+    def search(self, name):
+        return super().search(None if name is None else {
             "name" : name
         })
     
-    def delete_by_name(self, name):
-        self.delete({
+    def delete(self, name):
+        super().delete({
             "name" : name
         })
-
+    
     def build_object(self, data):
         return Edible(*data.values())

@@ -12,33 +12,33 @@ class View(tk.Tk):
 
         ttk.Style().theme_use('clam')
 
-        self.__panels = {
+        self.panels = {
             "Comida": EdiblePanel(),
             "Cardápio": DailyMenuPanel(),
             "Restaurante": RestaurantPanel()
         }
-        self.__selected_panel = None
+        self.selected_panel = None
 
-        self.__sidebar = ttk.Frame(self)
+        self.sidebar = ttk.Frame(self)
         
-        ttk.Label(self.__sidebar, text = "RUConnect") \
+        ttk.Label(self.sidebar, text = "RUConnect") \
             .pack(expand = True, anchor = "n", pady = 200)
 
-        for panel_id in self.__panels:
-            button = ttk.Button(self.__sidebar, text = panel_id,
+        for panel_id in self.panels:
+            button = ttk.Button(self.sidebar, text = panel_id,
                                 command = self.panel_setter(panel_id))
             button.pack(expand = True, fill = tk.X)
 
-        self.__sidebar.pack(side = tk.LEFT, padx = 10, pady = 10)
+        self.sidebar.pack(side = tk.LEFT, padx = 10, pady = 10)
 
         self.set_panel("Comida")
 
     def set_panel(self, panel_id):
-        if self.__selected_panel:
-            self.__panels[self.__selected_panel].pack_forget()
+        if self.selected_panel:
+            self.panels[self.selected_panel].pack_forget()
 
-        self.__selected_panel = panel_id
-        self.__panels[self.__selected_panel].pack(
+        self.selected_panel = panel_id
+        self.panels[self.selected_panel].pack(
             in_ = self,
             expand = True,
             side = tk.RIGHT,

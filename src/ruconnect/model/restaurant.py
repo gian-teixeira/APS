@@ -1,39 +1,39 @@
 class Restaurant:
-    __instance = None
-    __price = 0
-    __name = ""
-    __operating_time = ("", "")
+    instance = None
+    price : float = 0
+    name : str = ""
+    operating_time : tuple[str,str] = ("", "")
     
     @classmethod
     def get_instance(cls):
-        if cls.__instance is None:
-            cls.__instance = cls()
-        return cls.__instance
+        if cls.instance is None:
+            cls.instance = cls()
+        return cls.instance
     
-    def get_price(self):
-        return self.__price
+    def get_price(self) -> float:
+        return self.price
     
-    def get_name(self):
-        return self.__name
+    def get_name(self) -> str:
+        return self.name
     
-    def get_operating_time(self):
-        return self.__operating_time
+    def get_operating_time(self) -> tuple[str,str]:
+        return self.operating_time
     
-    def set_price(self, price):
-        self.__price = price
+    def set_price(self, price) -> None:
+        self.price = price
 
-    def set_name(self, name):
-        self.__name = name
+    def set_name(self, name) -> None:
+        self.name = name
     
-    def set_operating_time(self, operating_time):
-        self.__operating_time = operating_time
+    def set_operating_time(self, operating_time : tuple[str,str]):
+        self.operating_time = operating_time
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "name" : self.get_name(),
             "time" : self.get_operating_time(),
             "price" : self.get_price()
         }
     
-    def attr_labels(self):
+    def attr_labels(self) -> tuple:
         return ("Nome", "Tempo de Funcionamento", "Preço")

@@ -4,7 +4,7 @@ from tkinter import ttk
 class Card(ttk.Frame):
     def __init__(self, title_name, data, delete_callback):
         super().__init__(relief = tk.GROOVE)
-        self.__delete_callback = delete_callback
+        self.delete_callback = delete_callback
 
         title = ttk.Label(self, text = title_name, font = ('Helvetic 10 bold'))
         title.pack(expand = True)
@@ -22,5 +22,5 @@ class Card(ttk.Frame):
         delete_button.pack(pady = 10)
 
     def __delete(self):
-        self.__delete_callback()
+        self.delete_callback()
         self.destroy()

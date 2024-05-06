@@ -3,39 +3,39 @@ from model.restaurant import Restaurant
 
 class DailyMenu:
     def __init__(self, date):
-        restaurant : Restaurant = Restaurant.get_instance()
+        restaurant = Restaurant.get_instance()
 
-        self.__price : float = restaurant.get_price()
-        self.__lunch : list[Edible] = []
-        self.__dinner : list[Edible] = []
-        self.__date = date
+        self.price = restaurant.get_price()
+        self.lunch = []
+        self.dinner = []
+        self.date = date
 
     def lunch_add(self, edible):
-        self.__lunch += edible
+        self.lunch += edible
 
     def dinner_add(self, edible):
-        self.__dinner += edible
+        self.dinner += edible
 
     def lunch_erase(self):
-        self.__lunch = []
+        self.lunch = []
 
     def dinner_erase(self):
-        self.__dinner = []
+        self.dinner = []
 
     def get_lunch(self):
-        return self.__lunch
+        return self.lunch
     
     def get_dinner(self):
-        return self.__dinner
+        return self.dinner
     
     def get_price(self):
-        return self.__price
+        return self.price
     
     def set_price(self, price):
-        self.__price = price
+        self.price = price
 
     def get_date(self):
-        return self.__date
+        return self.date
     
     def to_dict(self):
         return {

@@ -34,8 +34,6 @@ class RestaurantRegister(tk.Frame):
         self.__confirm_button.pack(pady = 10)
         self.update_card()
 
-
-
     def confirm(self):
         restaurant = Restaurant.get_instance()
         restaurant.set_name(self.__name_entry.get_content())
@@ -60,4 +58,3 @@ class RestaurantRegister(tk.Frame):
 
         self.__card = Card("Restaurante", fields, lambda: ())
         self.__card.pack(in_ = self.__right, expand = True, ipadx = 10, ipady = 10)
-          

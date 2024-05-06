@@ -1,6 +1,5 @@
 from persistence.persistence import Persistence
 from view.view import View
-from sys import argv
 
 class Programa:
     @staticmethod

@@ -1,0 +1,2 @@
+mypy --check-untyped-defs src/ruconnect
+python3 src/ruconnect/programa.py

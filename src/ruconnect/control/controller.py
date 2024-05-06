@@ -8,7 +8,7 @@ class Controller(dict, ABC):
     def save(self, obj):
         self.persistence.register(obj.to_dict())
 
-    def search(self, data = None):
+    def search(self, data : dict | None = None):
         valid_info = self.persistence.find(data)
         return [self.build_object(info) for info in valid_info]
     

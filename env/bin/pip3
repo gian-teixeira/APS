@@ -1,4 +1,4 @@
-#!/home/giancarlo/Documents/APS/env/bin/python3
+#!/home/gian/Documents/APS/env/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

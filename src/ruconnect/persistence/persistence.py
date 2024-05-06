@@ -1,5 +1,6 @@
 from os import path
 import json
+import re
 
 class Persistence:
     __folder : str = "../data"
@@ -7,13 +8,13 @@ class Persistence:
     def __init__(self, 
                  name : str):
         self.__name : str = name
-        self.__data : dict
+        self.data : dict
         self.load()
         
     def register(self, data : dict):
         self.load()
 
-        self.__data["items"].append(data)
+        self.data["items"].append(data)
         self.save()
 
     def delete(self, data : dict):
@@ -22,20 +23,29 @@ class Persistence:
         targets = self.find(data)
 
         for target in targets:
-            index = self.__data["items"].index(target)
-            del self.__data["items"][index]
+            index = self.data["items"].index(target)
+            del self.data["items"][index]
 
         self.save()
     
-    def find(self, filter = None):
+    def find(self, specs : dict | None = None):
         self.load()
 
-        if filter is None:
-            return self.__data["items"]
-
-        filter_items = set(filter.items())
-        found = [item for item in self.__data["items"] 
-                 if set(item.items()).issuperset(filter_items)]
+        if specs is None:
+            return self.data["items"]
+        
+        found = []
+        
+        for item in self.data["items"]:
+            valid = True
+            for key in specs:
+                value = str(specs[key]).lower()
+                if key in item and re.search(f'^{value}.*', str(item[key]).lower()):
+                    continue
+                valid = False
+                break
+            if valid:
+                found.append(item)
 
         return found
     
@@ -46,7 +56,7 @@ class Persistence:
         try:
             filename : str = self.filename()
             with open(filename, "r") as file:
-                self.__data = json.loads(file.read())
+                self.data = json.loads(file.read())
         except:
             raise IOError("Collection load : Icompatible file format")
     
@@ -54,7 +64,7 @@ class Persistence:
         try:
             filename : str = self.filename()
             with open(filename, "w") as file:
-                file.write(json.dumps(self.__data))
+                file.write(json.dumps(self.data))
         except IOError as io_error:
             raise IOError("Collection save : TODO")
 
@@ -70,17 +80,17 @@ class Persistence:
     
     def __dict__(self):
         self.load()
-        return self.__data
+        return self.data
 
     def __getitem__(self, item):
         self.load()
-        return self.__data[item]
+        return self.data[item]
 
     def get_name(self):
         return self.__name
     
     def get_data(self):
-        return self.__data
+        return self.data
     
     @classmethod
     def set_database_folder(cls, 
