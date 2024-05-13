@@ -38,7 +38,7 @@ class EdibleSearch(ttk.Frame):
         self.confirm()
 
     def selection_callback(self):
-        def callback():
+        def callback(event):
             selected = self.search.curselection()
 
             if len(selected) == 0: return
