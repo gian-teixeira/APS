@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 class Controller(dict, ABC):
     def __init__(self, persistence, cls):
         self.persistence = persistence
-        self.__cls = cls
+        self.__cls = cls # isso usa
 
     def save(self, obj):
         self.persistence.register(obj.to_dict())
