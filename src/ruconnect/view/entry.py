@@ -17,6 +17,6 @@ class Entry(tk.Frame):
     
     def clear(self):
         self.entry.delete(0, tk.END)
-    
+ 
     def on_update(self, func):
         self.content.trace_add('write', func)

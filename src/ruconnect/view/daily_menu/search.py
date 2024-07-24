@@ -20,7 +20,7 @@ class DailyMenuSearch(ttk.Frame):
         self.right = ttk.Frame(self)
         self.left = ttk.Frame(self)
         self.date_entry = Entry("Data")
-        self.search = SearchBox(DailyMenuController(DailyMenuPersistence()), "Data")
+        self.search = SearchBox(DailyMenuController(DailyMenuPersistence()), ["Data"])
 
     def confirm(self):
         date = self.date_entry.get_content()
