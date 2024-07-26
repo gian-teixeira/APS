@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import ttk, font as tk_font
         
 class EdiblePanel(tk.Frame):
-    def __init__(self, user):
+    def __init__(self):
         super().__init__()
         
         title = ttk.Label(self, text = "Comida", font = tk_font.BOLD)

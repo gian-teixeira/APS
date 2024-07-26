@@ -5,33 +5,30 @@ from view.feedback.panel import FeedbackPanel
 from view.user.panel import UserPanel
 from model.user import User, Student, Administrator
 from view.credit_manager import CreditDisplay
+from model.session import Session
 
 import tkinter as tk
 from tkinter import ttk
 
 class View(tk.Tk):
-    def __init__(self, user):
+    def __init__(self):
         super().__init__()
         ttk.Style().theme_use('clam')
         self.title("RUConnect")
 
-        self.user = user
         self.panels = {
-            "Comida": (EdiblePanel(user), User),
-            "Cardápio": (DailyMenuPanel(user), User),
-            "Avaliação": (FeedbackPanel(user), User),
-            "Usuário": (UserPanel(user), Administrator),
-            "Restaurante": (RestaurantPanel(user), Administrator),
+            "Comida": (EdiblePanel(), User),
+            "Cardápio": (DailyMenuPanel(), User),
+            "Avaliação": (FeedbackPanel(), User),
+            "Usuário": (UserPanel(), Administrator),
+            "Restaurante": (RestaurantPanel(), Administrator),
         }
         self.selected_panel = None
         self.sidebar = ttk.Frame(self)
         
         ttk.Label(self.sidebar, text = "RUConnect").pack(expand = True, anchor = "n", pady = 200)
-        
-        # User information
-        #ttk.Label(self.sidebar, text = user.id).pack(expand = True, anchor = "n", pady = 200)
-        #ttk.Label(self.sidebar, text = user.name).pack(expand = True, anchor = "n", pady = 200)
-        #ttk.Label(self.sidebar, text = user.name).pack(expand = True, anchor = "n", pady = 200)
+        user = Session.get_user()
+
         if isinstance(user, Student):
             credits = CreditDisplay(user, self)
             credits.pack()

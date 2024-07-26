@@ -6,7 +6,7 @@ import tkinter as tk
 from tkinter import ttk, font as tk_font
         
 class UserPanel(tk.Frame):
-    def __init__(self, user):
+    def __init__(self):
         super().__init__()
         
         title = ttk.Label(self, text = "Avaliação", font = tk_font.BOLD)

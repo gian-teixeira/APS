@@ -1,6 +1,5 @@
 env/
 __pycache__/
+!.gitkeep
 data/*
 .mypy_cache
-
-!.gitkeep

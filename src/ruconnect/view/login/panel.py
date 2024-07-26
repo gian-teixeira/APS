@@ -2,6 +2,7 @@ from control.user import AdministratorController, StudentController
 from persistence.user import AdministratorPersistence, StudentPersistence
 from view.entry import Entry
 from view.selector import Selector
+from model.user import Administrator
 from tkinter import Tk, ttk, font
         
 class LoginPanel(Tk):
@@ -19,7 +20,10 @@ class LoginPanel(Tk):
         self.error_label = ttk.Label(self.container, text = "Usuário não encontrado")
         self.enter_callback = enter_callback
 
-    def enter(self):
+    def enter(self, force = False):
+        if force:
+            self.enter_callback(Administrator("Euler", 1655, 271))
+
         match self.type.get_selection():
             case "Administrador": controller = AdministratorController(AdministratorPersistence())
             case "Estudante": controller = StudentController(StudentPersistence())

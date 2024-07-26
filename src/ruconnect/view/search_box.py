@@ -16,7 +16,6 @@ class SearchBox(tk.Frame):
         self.entries = list()
 
         for label in entries:
-            print(label)
             entry = Entry(label)
             entry.on_update(self.update)
             self.entries.append(entry)
