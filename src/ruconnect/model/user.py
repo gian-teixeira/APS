@@ -24,6 +24,9 @@ class User(ABC):
     def set_password(self, password : str) -> None:
         self.password = password
     
+    def __str__(self):
+        return f"{self.id} {self.name}"
+
     @abstractmethod
     def to_dict(self): ...
         

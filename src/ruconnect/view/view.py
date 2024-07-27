@@ -3,9 +3,9 @@ from view.daily_menu.panel import DailyMenuPanel
 from view.restaurant.panel import RestaurantPanel
 from view.feedback.panel import FeedbackPanel
 from view.user.panel import UserPanel
-from model.user import User, Student, Administrator
-from view.credit_manager import CreditDisplay
+from model.user import User, Administrator
 from model.session import Session
+from view.user.info import UserInfoDisplay
 
 import tkinter as tk
 from tkinter import ttk
@@ -15,7 +15,7 @@ class View(tk.Tk):
         super().__init__()
         ttk.Style().theme_use('clam')
         self.title("RUConnect")
-
+        
         self.panels = {
             "Comida": (EdiblePanel(), User),
             "Cardápio": (DailyMenuPanel(), User),
@@ -26,22 +26,23 @@ class View(tk.Tk):
         self.selected_panel = None
         self.sidebar = ttk.Frame(self)
         
-        ttk.Label(self.sidebar, text = "RUConnect").pack(expand = True, anchor = "n", pady = 200)
+        ttk.Label(self.sidebar, text = "RUConnect").pack(anchor = "n")
         user = Session.get_user()
+        self.credits = None
 
-        if isinstance(user, Student):
-            credits = CreditDisplay(user, self)
-            credits.pack()
-
+        self.user_area = UserInfoDisplay(user, self.sidebar)
+        self.user_area.pack(pady = 10)
+        
+        self.button_area = ttk.Frame(self.sidebar)
+        
         for panel_id in self.panels:
             if not isinstance(user, self.panels[panel_id][1]): continue
-            button = ttk.Button(self.sidebar, text = panel_id,
+            button = ttk.Button(self.button_area, text = panel_id,
                                 command = self.panel_setter(panel_id))
             button.pack(expand = True, fill = tk.X)
         
-
-        self.sidebar.pack(side = tk.LEFT, padx = 10, pady = 10)
-
+        self.button_area.pack(expand = True, fill = tk.X, anchor = 's', pady = 30)
+        self.sidebar.pack(fill = tk.Y, side = tk.LEFT, padx = 10, pady = 10)
         self.set_panel("Comida")
 
     def set_panel(self, panel_id):

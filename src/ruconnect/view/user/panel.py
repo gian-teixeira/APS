@@ -1,6 +1,5 @@
-from view.feedback.search import FeedbackSearch
 from view.user.register import UserRegister
-from model.user import Administrator
+from view.user.search import UserSearch
 
 import tkinter as tk
 from tkinter import ttk, font as tk_font
@@ -24,6 +23,11 @@ class UserPanel(tk.Frame):
         register = UserRegister()
         register.pack(in_ = register_frame, expand = True, anchor = 'n')
         register_frame.pack(expand = True, fill = tk.BOTH)
+
+        search_frame = tk.Frame(tabs["Busca"])
+        search = UserSearch()
+        search.pack(in_ = search_frame, expand = True, anchor = 'n')
+        search_frame.pack(expand = True, fill = tk.BOTH)
 
         title.pack(fill = tk.BOTH)
         sep.pack(fill = tk.X)

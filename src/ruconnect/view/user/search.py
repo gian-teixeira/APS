@@ -1,30 +1,56 @@
 from persistence.feedback import FeedbackPersistence
 from control.feedback import FeedbackController
+from control.user import StudentController, AdministratorController
+from persistence.user import StudentPersistence, AdministratorPersistence
 from view.search_box import SearchBox
-from view.card import Card
+from view.selector import Selector
+from model.user import Administrator, Student
+from view.user.info import UserInfoDisplay
+from model.session import Session
 
 import tkinter as tk
 from tkinter import ttk
 
-class FeedbackSearch(ttk.Frame):
-    def __init__(self):
-        super().__init__()
+class UserSearch(ttk.Frame):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
-        self.persistence = FeedbackPersistence()
-        self.controller = FeedbackController(self.persistence)
-        self.card = None
-        self.selected_name = ""
-        self.right = ttk.Frame(self)
-        self.left = ttk.Frame(self)
-        self.search = SearchBox(FeedbackController(FeedbackPersistence()),
-                                ["Data", "Período", "Usuário"], 
-                                tk.SINGLE, self.selection_callback())
+        self.type_selector = Selector("Tipo", ["Administrador", "Aluno"],
+                                      selection_callback = self.type_selection_callback)
+        self.selection_card = None
 
-        self.left.pack(expand = True, side = tk.TOP, padx = 10, pady = 10)
-        self.right.pack(expand = True, side = tk.BOTTOM, padx = 10, pady = 10)
-        self.search.pack(in_ = self.left, fill = tk.BOTH)
+    def type_selection_callback(self, event):
+        self.type_selector.pack_forget()
+
+        if self.type_selector.get_selection() == "Administrador":
+            self.user_type = Administrator
+            self.controller = AdministratorController(AdministratorPersistence())
+        else:
+            self.user_type = Student
+            self.controller = StudentController(StudentPersistence())
+        
+        self.search = SearchBox(self.controller, ["Id"], tk.SINGLE,
+                                self.search_selection_callback)
+        
+        self.search.pack(in_ = self)
     
-    def confirm(self):
+    def search_selection_callback(self, event):
+        user_id = self.search.entry_values()[0]
+        user = self.controller.search(user_id)[0]
+
+        if self.selection_card:
+            self.selection_card.pack_forget()
+        self.selection_card = ttk.Frame(self)
+        self.user_info = UserInfoDisplay(user, self)
+        self.user_info.pack()
+        
+        self.selection_card.pack()
+
+    def pack(self, *args, **kwargs):
+        self.type_selector.pack(in_ = self)
+        super().pack(*args, **kwargs)
+    
+    '''def confirm(self):
         edible_name = self.entry.get_content()
         self.search_result = self.controller.search_by_name(edible_name)
         self.response_list.delete(0, tk.END)
@@ -51,4 +77,4 @@ class FeedbackSearch(ttk.Frame):
             card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)
             self.card = card
 
-        return callback
+        return callback'''

@@ -31,6 +31,9 @@ class SearchBox(tk.Frame):
         search_content = '/'.join(search_content)
         if(search_content == ''): search_content = None
         return self.controller.search(search_content)
+    
+    def entry_values(self):
+        return [entry.get_content() for entry in self.entries]
 
     def curselection(self):
         items = self.search()
