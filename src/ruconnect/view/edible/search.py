@@ -2,6 +2,7 @@ from persistence.edible import EdiblePersistence
 from control.edible import EdibleController
 from view.search_box import SearchBox
 from view.card import Card
+from model.session import Session
 
 import tkinter as tk
 from tkinter import ttk
@@ -23,16 +24,9 @@ class EdibleSearch(ttk.Frame):
         self.right.pack(expand = True, side = tk.BOTTOM, padx = 10, pady = 10)
         self.search.pack(in_ = self.left, fill = tk.BOTH)
 
-    def confirm(self):
-        edible_name = self.entry.get_content()
-        self.search_result = self.controller.search_by_name(edible_name)
-        self.response_list.delete(0, tk.END)
-        for value in self.search_result:
-            self.response_list.insert(tk.END, str(value))
-
     def delete(self):
-        self.controller.delete_by_name(self.selected_name)
-        self.confirm()
+        self.controller.delete(self.selected_name)
+        self.search.update()
 
     def selection_callback(self):
         def callback(event):
@@ -46,7 +40,7 @@ class EdibleSearch(ttk.Frame):
 
             fields = dict(zip(selected.attr_labels(), selected.to_dict().values()))
 
-            card = Card("Comida", fields, self.delete)
+            card = Card(Session.get_user(), "Comida", fields, self.delete)
             card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)
             self.card = card
 

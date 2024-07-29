@@ -14,10 +14,10 @@ class RestaurantPanel(ttk.Frame):
         tabs = dict()
         
         for tab_name in tab_names:
-            tabs[tab_name] = tk.Frame(tab_controller)
+            tabs[tab_name] = ttk.Frame(tab_controller)
             tab_controller.add(tabs[tab_name], text = tab_name)
         
-        register_frame = tk.Frame(tabs["Registro"])
+        register_frame = ttk.Frame(tabs["Registro"])
         register = RestaurantRegister()
         register.pack(in_ = register_frame, expand = True, anchor = 'n')
         register_frame.pack(expand = True, fill = tk.BOTH)

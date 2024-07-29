@@ -16,15 +16,15 @@ class EdiblePanel(tk.Frame):
         tabs = dict()
 
         for tab_name in tab_names:
-            tabs[tab_name] = tk.Frame(tab_controller)
+            tabs[tab_name] = ttk.Frame(tab_controller)
             tab_controller.add(tabs[tab_name], text = tab_name)
 
-        search_frame = tk.Frame(tabs["Busca"])
+        search_frame = ttk.Frame(tabs["Busca"])
         search = EdibleSearch()
         search.pack(in_ = search_frame, expand = True, anchor = 'n')
         search_frame.pack(expand = True, fill = tk.BOTH)
         
-        register_frame = tk.Frame(tabs["Registro"])
+        register_frame = ttk.Frame(tabs["Registro"])
         register = EdibleRegister()
         register.pack(in_ = register_frame, expand = True, anchor = 'n')
         register_frame.pack(expand = True, fill = tk.BOTH)

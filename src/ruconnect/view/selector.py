@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-class Selector(tk.Frame):
+class Selector(ttk.Frame):
     def __init__(self, label_text, values, selection_callback = None, default = 0):
         super().__init__()
         self.content = tk.StringVar()

@@ -16,25 +16,34 @@ class LoginPanel(Tk):
         self.id = Entry("Id")
         self.password = Entry("Password")
         self.type = Selector("Tipo", ("Estudante", "Administrador"))
-        self.button = ttk.Button(self, text = "Entrar", command = self.enter)
-        self.error_label = ttk.Label(self.container, text = "Usuário não encontrado")
+        self.button = ttk.Button(self, text = "Entrar", command = self.attempt)
+        self.error_label = ttk.Label(self.container, text = "Credenciais inválidas")
         self.enter_callback = enter_callback
 
-    def enter(self, force = False):
+    def error(self):
+        self.error_label.pack()
+    
+    def success(self, user):
+        self.enter_callback(user)
+
+    def verify(self, search_result):
+        return len(search_result) != 0 and \
+            search_result[0].password == self.password.get_content()
+
+    def attempt(self, force = False):
         if force:
             self.enter_callback(Administrator("Euler", 1655, 271))
 
         match self.type.get_selection():
             case "Administrador": controller = AdministratorController(AdministratorPersistence())
             case "Estudante": controller = StudentController(StudentPersistence())
-        print(self.type.get_selection())
-        user = controller.search(self.id.get_content())
-        if len(user) == 0: 
-            self.error_label.pack()
-            return
-        user = user[0]
-        if user.password == self.password.get_content():
-            self.enter_callback(user)
+        
+        search_result = controller.search(self.id.get_content())
+        
+        if self.verify(search_result):
+            self.success(search_result[0])
+        else:
+            self.error()
         
     def mainloop(self, *args, **kwargs):
         ttk.Label(self.wrapper, text = "RuConnect", 

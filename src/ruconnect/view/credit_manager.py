@@ -4,7 +4,6 @@ import tkinter as tk
 from view.entry import Entry
 from control.user import StudentController
 from persistence.user import StudentPersistence
-from model.session import Session
 
 class CreditManager(ttk.Frame):
     def __init__(self, user, *args, **kwargs):

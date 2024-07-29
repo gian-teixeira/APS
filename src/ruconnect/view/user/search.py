@@ -1,5 +1,3 @@
-from persistence.feedback import FeedbackPersistence
-from control.feedback import FeedbackController
 from control.user import StudentController, AdministratorController
 from persistence.user import StudentPersistence, AdministratorPersistence
 from view.search_box import SearchBox

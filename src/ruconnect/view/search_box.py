@@ -3,13 +3,13 @@ from view.entry import Entry
 import tkinter as tk
 from tkinter import ttk
 
-class SearchBox(tk.Frame):
+class SearchBox(ttk.Frame):
     def __init__(self, controller, entries, selectmode = tk.MULTIPLE, selection_callback = None):
         super().__init__()
         
         self.controller = controller
         self.selectmode = selectmode
-        self.select_box = tk.Frame(self)
+        self.select_box = ttk.Frame(self)
         self.update_button = ttk.Button(self, text = 'Atualizar', command = self.update)
         self.listbox = tk.Listbox(self.select_box, selectmode = selectmode, highlightthickness = 0)
         self.scroll = ttk.Scrollbar(self.select_box)

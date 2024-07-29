@@ -1,8 +1,6 @@
 from persistence.user import StudentPersistence, AdministratorPersistence
 from control.user import StudentController, AdministratorController
 from model.user import Student, Administrator
-from model.edible import Edible
-from model.edible_type import EdibleType
 from view.entry import Entry
 from view.selector import Selector
 

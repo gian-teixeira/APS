@@ -3,11 +3,12 @@ from control.restaurant import RestaurantController
 from model.restaurant import Restaurant
 from view.entry import Entry
 from view.card import Card
+from model.session import Session
 
 import tkinter as tk
 from tkinter import ttk
 
-class RestaurantRegister(tk.Frame):
+class RestaurantRegister(ttk.Frame):
     def __init__(self):
         super().__init__()
 
@@ -15,9 +16,9 @@ class RestaurantRegister(tk.Frame):
         self.controller = RestaurantController(self.persistence)
         self.name_entry = Entry("Restaurante")
         self.price = Entry("Preço")
-        self.left = tk.Frame(self)
-        self.right = tk.Frame(self)
-        self.time_frame = tk.Frame(self.left)
+        self.left = ttk.Frame(self)
+        self.right = ttk.Frame(self)
+        self.time_frame = ttk.Frame(self.left)
         self.lunch_time_entry = Entry("Horário Almoço")
         self.dinner_time_entry = Entry("Horário Jantar")
         self.card = None
@@ -56,5 +57,5 @@ class RestaurantRegister(tk.Frame):
 
         fields = dict(zip(restaurant.attr_labels(), restaurant.to_dict().values()))
 
-        self.card = Card("Restaurante", fields, lambda: ())
+        self.card = Card(Session.get_user(), "Restaurante", fields, lambda: ())
         self.card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)

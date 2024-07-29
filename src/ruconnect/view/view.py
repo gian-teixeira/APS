@@ -1,7 +1,6 @@
 from view.edible.panel import EdiblePanel
 from view.daily_menu.panel import DailyMenuPanel
 from view.restaurant.panel import RestaurantPanel
-from view.feedback.panel import FeedbackPanel
 from view.user.panel import UserPanel
 from model.user import User, Administrator
 from model.session import Session
@@ -19,7 +18,6 @@ class View(tk.Tk):
         self.panels = {
             "Comida": (EdiblePanel(), User),
             "Cardápio": (DailyMenuPanel(), User),
-            "Avaliação": (FeedbackPanel(), User),
             "Usuário": (UserPanel(), Administrator),
             "Restaurante": (RestaurantPanel(), Administrator),
         }

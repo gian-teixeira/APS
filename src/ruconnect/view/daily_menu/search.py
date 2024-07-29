@@ -3,6 +3,7 @@ from control.daily_menu import DailyMenuController
 from view.entry import Entry
 from view.card import Card
 from view.search_box import SearchBox
+from model.session import Session
 
 import tkinter as tk
 from tkinter import ttk
@@ -49,7 +50,7 @@ class DailyMenuSearch(ttk.Frame):
 
             fields = dict(zip(selected.attr_labels(), selected.to_dict().values()))
 
-            card = Card("Cardápio do dia", fields, self.delete)
+            card = Card(Session.get_user(), "Cardápio do dia", fields, self.delete)
             card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)
             self.card = card
 
