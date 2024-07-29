@@ -16,12 +16,12 @@ class UserSearch(ttk.Frame):
         super().__init__(*args, **kwargs)
 
         self.type_selector = Selector("Tipo", ["Administrador", "Aluno"],
-                                      selection_callback = self.type_selection_callback)
+                                      selection_callback = self.type_selection_callback,
+                                      default = 0)
         self.selection_card = None
+        self.search = None
 
     def type_selection_callback(self, event):
-        self.type_selector.pack_forget()
-
         if self.type_selector.get_selection() == "Administrador":
             self.user_type = Administrator
             self.controller = AdministratorController(AdministratorPersistence())
@@ -29,6 +29,8 @@ class UserSearch(ttk.Frame):
             self.user_type = Student
             self.controller = StudentController(StudentPersistence())
         
+        if self.search:
+            self.search.pack_forget()
         self.search = SearchBox(self.controller, ["Id"], tk.SINGLE,
                                 self.search_selection_callback)
         
@@ -41,13 +43,24 @@ class UserSearch(ttk.Frame):
         if self.selection_card:
             self.selection_card.pack_forget()
         self.selection_card = ttk.Frame(self)
-        self.user_info = UserInfoDisplay(user, self)
+        self.user_info = UserInfoDisplay(user, self.selection_card)
+        self.delete_button = ttk.Button(self.selection_card,
+                                        text = "Delete",
+                                        command = self.delete_selection_callback)
+
         self.user_info.pack()
-        
+        self.delete_button.pack()
         self.selection_card.pack()
+    
+    def delete_selection_callback(self):
+        user_id = self.search.entry_values()[0]
+        self.controller.delete(user_id)
+        self.selection_card.pack_forget()
+        self.search.update()
 
     def pack(self, *args, **kwargs):
         self.type_selector.pack(in_ = self)
+        self.type_selection_callback(None)
         super().pack(*args, **kwargs)
     
     '''def confirm(self):

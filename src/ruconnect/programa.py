@@ -19,6 +19,7 @@ class Programa:
     def main(cls):
         Persistence.set_database_folder("./data")
         cls.display = LoginPanel(cls.login)
+        #cls.display.enter(True)
         if len(argv) > 1:
             cls.display.enter(force = True)
         cls.display.mainloop()

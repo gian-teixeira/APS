@@ -9,7 +9,7 @@ from model.session import Session
 class CreditManager(ttk.Frame):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        assert isinstance(Session.get_user(), Student)
+        assert isinstance(user, Student)
 
         self.user = user
         self.credit_var = tk.StringVar()
@@ -18,7 +18,7 @@ class CreditManager(ttk.Frame):
         self.credit_value = ttk.Label(self.credit_frame, textvariable = self.credit_var)
         self.credits_entry = Entry("Comprar créditos")
         self.button = ttk.Button(self, text = 'Adicionar', command = self.compute_credits)
-        self.credit_var.set(Session.get_user().credit)
+        self.credit_var.set(user.credit)
 
         self.error_label = tk.Label(self, fg = 'red', wraplength = 200,
                                     text = 'Valor inválido. Insira um inteiro positivo!')

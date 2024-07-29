@@ -27,7 +27,7 @@ class LoginPanel(Tk):
         match self.type.get_selection():
             case "Administrador": controller = AdministratorController(AdministratorPersistence())
             case "Estudante": controller = StudentController(StudentPersistence())
-        print(self.id.get_content())
+        print(self.type.get_selection())
         user = controller.search(self.id.get_content())
         if len(user) == 0: 
             self.error_label.pack()

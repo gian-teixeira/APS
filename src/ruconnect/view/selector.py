@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 class Selector(tk.Frame):
-    def __init__(self, label_text, values, selection_callback = None):
+    def __init__(self, label_text, values, selection_callback = None, default = 0):
         super().__init__()
         self.content = tk.StringVar()
         
@@ -10,6 +10,7 @@ class Selector(tk.Frame):
         self.box = ttk.Combobox(self, textvariable = self.content)
         self.box["values"] = values
         self.box["state"] = "readonly"
+        self.box.current(default)
 
         if selection_callback:
             self.box.bind("<<ComboboxSelected>>", selection_callback)
