@@ -3,7 +3,7 @@ from persistence.user import AdministratorPersistence, StudentPersistence
 from view.entry import Entry
 from view.selector import Selector
 from model.user import Administrator
-from tkinter import Tk, ttk, font
+from tkinter import Tk, StringVar, ttk, font
         
 class LoginPanel(Tk):
     def __init__(self, enter_callback):
@@ -17,18 +17,24 @@ class LoginPanel(Tk):
         self.password = Entry("Password")
         self.type = Selector("Tipo", ("Estudante", "Administrador"))
         self.button = ttk.Button(self, text = "Entrar", command = self.attempt)
-        self.error_label = ttk.Label(self.container, text = "Credenciais inválidas")
+        self.error_text = StringVar()
+        self.error_label = ttk.Label(self.container, textvariable = self.error_text)
         self.enter_callback = enter_callback
 
-    def error(self):
+    def error(self, message):
+        self.error_text.set(message)
         self.error_label.pack()
     
     def success(self, user):
         self.enter_callback(user)
 
     def verify(self, search_result):
-        return len(search_result) != 0 and \
-            search_result[0].password == self.password.get_content()
+        if len(search_result) == 0:
+            self.error("Usuário não encontrado")
+        elif search_result[0].password != self.password.get_content():
+            self.error("Senha incorreta")
+        else:
+            self.success(search_result[0])
 
     def attempt(self, force = False):
         if force:
@@ -40,10 +46,7 @@ class LoginPanel(Tk):
         
         search_result = controller.search(self.id.get_content())
         
-        if self.verify(search_result):
-            self.success(search_result[0])
-        else:
-            self.error()
+        self.verify(search_result)
         
     def mainloop(self, *args, **kwargs):
         ttk.Label(self.wrapper, text = "RuConnect", 
