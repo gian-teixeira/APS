@@ -36,15 +36,12 @@ class LoginPanel(Tk):
         else:
             self.success(search_result[0])
 
-    def attempt(self, force = False):
-        if force:
-            self.enter_callback(Administrator("Euler", 1655, 271))
-
+    def attempt(self):
         match self.type.get_selection():
-            case "Administrador": controller = AdministratorController(AdministratorPersistence())
-            case "Estudante": controller = StudentController(StudentPersistence())
+            case "Administrador": user_controller = AdministratorController(AdministratorPersistence())
+            case "Estudante": user_controller = StudentController(StudentPersistence())
         
-        search_result = controller.search(self.id.get_content())
+        search_result = user_controller.search(self.id.get_content()) 
         
         self.verify(search_result)
         

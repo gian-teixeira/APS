@@ -26,11 +26,9 @@ class View(tk.Tk):
         
         ttk.Label(self.sidebar, text = "RUConnect").pack(anchor = "n")
         user = Session.get_user()
-        self.credits = None
 
         self.user_area = UserInfoDisplay(user, self.sidebar)
         self.user_area.pack(pady = 10)
-        
         self.button_area = ttk.Frame(self.sidebar)
         
         for panel_id in self.panels:

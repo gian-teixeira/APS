@@ -36,7 +36,7 @@ class EdibleRegister(ttk.Frame):
 
         self.error_label.pack_forget()
         try:
-            self.search_result = self.controller.save(edible)
+            self.controller.save(edible)
         except Exception as e:
             self.error_label.pack(expand = True)
         else:

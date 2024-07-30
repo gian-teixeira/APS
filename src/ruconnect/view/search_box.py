@@ -6,6 +6,7 @@ from tkinter import ttk
 class SearchBox(ttk.Frame):
     def __init__(self, controller, entries, selectmode = tk.MULTIPLE, selection_callback = None):
         super().__init__()
+        assert(len(entries) > 0)
         
         self.controller = controller
         self.selectmode = selectmode
