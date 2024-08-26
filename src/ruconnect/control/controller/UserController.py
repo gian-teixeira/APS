@@ -1,4 +1,4 @@
-from control.controller import Controller
+from ruconnect.control.controller import Controller
 from model.user import Student
 from model.user import Administrator
 from abc import ABC, abstractmethod

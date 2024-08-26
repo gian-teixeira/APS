@@ -2,7 +2,7 @@ from model.user import Student
 from tkinter import ttk
 import tkinter as tk
 from view.entry import Entry
-from control.user import StudentController
+from ruconnect.control.UserController import StudentController
 from persistence.user import StudentPersistence
 
 class CreditManager(ttk.Frame):

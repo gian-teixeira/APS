@@ -1,5 +1,5 @@
 from persistence.restaurant import RestaurantPersistence
-from control.restaurant import RestaurantController
+from ruconnect.control.RestaurantController import RestaurantController
 from model.restaurant import Restaurant
 from view.entry import Entry
 from view.card import Card

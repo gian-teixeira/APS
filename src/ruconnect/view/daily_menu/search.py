@@ -1,5 +1,5 @@
 from persistence.daily_menu import DailyMenuPersistence
-from control.daily_menu import DailyMenuController
+from ruconnect.control.DailyMenuController import DailyMenuController
 from view.entry import Entry
 from view.card import Card
 from view.search_box import SearchBox

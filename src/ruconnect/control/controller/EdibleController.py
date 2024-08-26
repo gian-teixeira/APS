@@ -1,9 +1,11 @@
-from control.controller import Controller
+from ruconnect.control.controller import Controller
 from model.edible import Edible
 
+from control.linker import EdibleLinker
+
 class EdibleController(Controller):
-    def __init__(self, persistence):
-        super().__init__(persistence, Edible)
+    def __init__(self):
+        self.linker = EdibleLinker()
 
     def search(self, name):
         return super().search(None if name is None else {

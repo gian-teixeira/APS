@@ -1,0 +1,1 @@
+from persistence.Serializable import Serializable

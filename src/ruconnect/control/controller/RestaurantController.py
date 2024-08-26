@@ -1,4 +1,4 @@
-from control.controller import Controller
+from ruconnect.control.controller import Controller
 from model.restaurant import Restaurant
 
 class RestaurantController(Controller):

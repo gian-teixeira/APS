@@ -1,12 +1,12 @@
 from persistence.daily_menu import DailyMenuPersistence
 from persistence.edible import EdiblePersistence
-from control.daily_menu import DailyMenuController
-from control.edible import EdibleController
+from ruconnect.control.DailyMenuController import DailyMenuController
+from ruconnect.control.EdibleController import EdibleController
 from model.daily_menu import DailyMenu
 from view.entry import Entry
 from view.selector import Selector
 from persistence.daily_menu import DailyMenuPersistence
-from control.daily_menu import DailyMenuController
+from ruconnect.control.DailyMenuController import DailyMenuController
 from view.search_box import SearchBox
 
 import tkinter as tk

@@ -1,5 +1,5 @@
 from persistence.edible import EdiblePersistence
-from control.edible import EdibleController
+from ruconnect.control.EdibleController import EdibleController
 from view.search_box import SearchBox
 from view.card import Card
 from model.session import Session

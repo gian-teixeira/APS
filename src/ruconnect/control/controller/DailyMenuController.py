@@ -1,21 +1,12 @@
 from persistence.edible import EdiblePersistence
-from control.edible import EdibleController
-from control.controller import Controller
+from ruconnect.control.controller import Controller, EdibleController
 from model.daily_menu import DailyMenu
+
+from ruconnect.persistence import Serializable
 
 class DailyMenuController(Controller):
     def __init__(self, persistence):
         super().__init__(persistence, DailyMenu)
-    
-    def search(self, value):
-        return super().search(None if value is None else {
-            "date" : value
-        })
-
-    def delete(self, value):
-        super().delete({
-            "date" : value
-        })
 
     def build_object(self, data):
         edible_persistence = EdiblePersistence()

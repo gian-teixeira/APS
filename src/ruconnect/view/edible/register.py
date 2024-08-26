@@ -1,5 +1,5 @@
 from persistence.edible import EdiblePersistence
-from control.edible import EdibleController
+from ruconnect.control.EdibleController import EdibleController
 from model.edible import Edible
 from model.edible_type import EdibleType
 from view.entry import Entry

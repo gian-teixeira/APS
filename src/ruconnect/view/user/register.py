@@ -1,5 +1,5 @@
 from persistence.user import StudentPersistence, AdministratorPersistence
-from control.user import StudentController, AdministratorController
+from ruconnect.control.UserController import StudentController, AdministratorController
 from model.user import Student, Administrator
 from view.entry import Entry
 from view.selector import Selector

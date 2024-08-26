@@ -1,4 +1,4 @@
-from control.user import StudentController, AdministratorController
+from ruconnect.control.UserController import StudentController, AdministratorController
 from persistence.user import StudentPersistence, AdministratorPersistence
 from view.search_box import SearchBox
 from view.selector import Selector
