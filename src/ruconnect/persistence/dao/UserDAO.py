@@ -1,9 +1,11 @@
-from persistence.persistence import Persistence
+from persistence.dao.DAO import DAO
 
-class StudentPersistence(Persistence):
-    def __init__(self):
-        super().__init__("student")
+class StudentDAO(DAO):
+    @property
+    def filename(self) -> str:
+        return "student"
 
-class AdministratorPersistence(Persistence):
-    def __init__(self):
-        super().__init__("administrator")
+class AdministratorDAO(DAO):
+    @property
+    def filename(self) -> str:
+        return "administrator"

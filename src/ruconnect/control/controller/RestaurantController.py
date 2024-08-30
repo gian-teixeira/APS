@@ -1,23 +1,7 @@
-from ruconnect.control.controller import Controller
-from model.restaurant import Restaurant
+from control.controller.Controller import Controller
+from control.linker.RestaurantLinker import RestaurantLinker
 
 class RestaurantController(Controller):
-    def __init__(self, persistence):
-        super().__init__(persistence, Restaurant)
-
-    def build_object(self, data):
-        restaurant = Restaurant.get_instance()
-        restaurant.set_name(data['name'])
-        restaurant.set_operating_time(data['time'])
-        restaurant.set_price(float(data['price']))
-
-    def save(self):
-        restaurant = Restaurant.get_instance()
-        self.delete()
-        super().save(restaurant)
-
-    def search(self):
-        return super().search(None)
-    
-    def delete(self):
-        super().delete(None)
+    @property
+    def linker(self):
+        return RestaurantController()

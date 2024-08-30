@@ -1,21 +1,7 @@
-from ruconnect.control.controller import Controller
-from model.edible import Edible
-
-from control.linker import EdibleLinker
+from control.controller.Controller import Controller
+from control.linker.EdibleLinker import EdibleLinker
 
 class EdibleController(Controller):
-    def __init__(self):
-        self.linker = EdibleLinker()
-
-    def search(self, name):
-        return super().search(None if name is None else {
-            "name" : name
-        })
-    
-    def delete(self, name):
-        super().delete({
-            "name" : name
-        })
-    
-    def build_object(self, data):
-        return Edible(*data.values())
+    @property
+    def linker(self):
+        return EdibleLinker()

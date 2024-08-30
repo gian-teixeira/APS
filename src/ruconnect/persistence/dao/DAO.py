@@ -1,15 +1,18 @@
 from abc import ABC, abstractmethod
 import json
+import os
 
 class DAO(ABC):
     instance = None
     data = None
 
     def __init__(self):
-        with open(self.filename, 'w+') as file:
+        print(os.getcwd(), f"data/{self.filename}.json")
+        with open(f"data/{self.filename}.json", 'r') as file:
             content = file.read()
             try: self.data = json.loads(content)
             except: self.data = dict()
+            print(self.filename, self.data)
 
     @classmethod
     def get_instance(cls):
@@ -22,11 +25,11 @@ class DAO(ABC):
         with open(self.filename, 'w+') as file:
             file.write(json_data)
     
-    @abstractmethod
     @property
+    @abstractmethod
     def filename(self) -> str: ...
 
-    def read(self, id : str | None) -> dict | list[dict]:
+    def read(self, id : str | None) -> None | dict | list[dict]:
         return self.data.get(id, None)
 
     def create(self, id : str, data : dict) -> None:

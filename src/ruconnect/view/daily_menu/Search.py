@@ -1,9 +1,8 @@
-from persistence.daily_menu import DailyMenuPersistence
-from ruconnect.control.DailyMenuController import DailyMenuController
-from view.entry import Entry
-from view.card import Card
-from view.search_box import SearchBox
-from model.session import Session
+from control.controller.DailyMenuController import DailyMenuController
+from view.Entry import Entry
+from view.Card import Card
+from view.SearchBox import SearchBox
+from view.Session import Session
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,8 +11,7 @@ class DailyMenuSearch(ttk.Frame):
     def __init__(self):
         super().__init__()
 
-        self.persistence = DailyMenuPersistence()
-        self.controller = DailyMenuController(self.persistence)
+        self.controller = DailyMenuController()
 
         self.card = None
         self.selected_date = ""
@@ -21,7 +19,7 @@ class DailyMenuSearch(ttk.Frame):
         self.right = ttk.Frame(self)
         self.left = ttk.Frame(self)
         self.date_entry = Entry("Data")
-        self.search = SearchBox(DailyMenuController(DailyMenuPersistence()), ["Data"])
+        self.search = SearchBox(self.controller, ["Data"])
 
     def confirm(self):
         date = self.date_entry.get_content()

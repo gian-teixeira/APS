@@ -1,4 +1,4 @@
-from view.restaurant.register import RestaurantRegister
+from view.restaurant.Register import RestaurantRegister
 
 import tkinter as tk
 from tkinter import ttk, font as tk_font

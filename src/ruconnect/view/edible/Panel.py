@@ -1,7 +1,7 @@
-from view.edible.search import EdibleSearch
-from view.edible.register import EdibleRegister
-from model.session import Session
-from model.user import Administrator
+from view.edible.Search import EdibleSearch
+from view.edible.Register import EdibleRegister
+from view.Session import Session
+from model.User import Administrator
 
 import tkinter as tk
 from tkinter import ttk, font as tk_font

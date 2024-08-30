@@ -1,6 +1,6 @@
 from persistence.dao.DAO import DAO
 
-class DailyMenuDAO(DAO):
+class StudentConsumptionDAO(DAO):
     @property
     def filename(self) -> str:
-        return "daily_menu"
+        return "student_consumption"

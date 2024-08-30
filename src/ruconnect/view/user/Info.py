@@ -1,5 +1,6 @@
-from view.credit_manager import CreditManager
-from model.user import Student
+from view.CreditManager import CreditManager
+
+from model import Student
 from tkinter import ttk
 
 class UserInfoDisplay(ttk.Frame):

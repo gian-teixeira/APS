@@ -1,4 +1,4 @@
-from persistence import DAO
+from persistence.dao.DAO import DAO
 
 class EdibleDAO(DAO):
     @property

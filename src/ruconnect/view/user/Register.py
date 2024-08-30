@@ -1,8 +1,7 @@
-from persistence.user import StudentPersistence, AdministratorPersistence
-from ruconnect.control.UserController import StudentController, AdministratorController
-from model.user import Student, Administrator
-from view.entry import Entry
-from view.selector import Selector
+from control.controller.UserController import StudentController, AdministratorController
+from model.User import Student, Administrator
+from view.Entry import Entry
+from view.Selector import Selector
 
 import tkinter as tk
 from tkinter import ttk
@@ -25,14 +24,14 @@ class UserRegister(ttk.Frame):
                 user = Administrator(self.name.get_content(),
                                      self.id.get_content(),
                                      self.password.get_content())
-                controller = AdministratorController(AdministratorPersistence())
+                controller = AdministratorController()
             case "Estudante":
                 user = Student(self.name.get_content(),
                                self.id.get_content(),
                                self.password.get_content(), 0)
-                controller = StudentController(StudentPersistence())
+                controller = StudentController()
          
-        controller.save(user)
+        controller.create(user)
         self.name.clear()
         self.id.clear()
         self.password.clear()

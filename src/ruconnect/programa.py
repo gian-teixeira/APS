@@ -1,7 +1,7 @@
-from persistence.persistence import Persistence
-from view.login.panel import LoginPanel
-from view.view import View
-from model.session import Session
+from persistence.Persistence import Persistence
+from view.login.Panel import LoginPanel
+from view.View import View
+from view.Session import Session
 from sys import argv
 
 class Programa:

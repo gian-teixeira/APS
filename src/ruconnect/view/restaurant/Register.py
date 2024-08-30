@@ -1,9 +1,8 @@
-from persistence.restaurant import RestaurantPersistence
-from ruconnect.control.RestaurantController import RestaurantController
-from model.restaurant import Restaurant
-from view.entry import Entry
-from view.card import Card
-from model.session import Session
+from control.controller.RestaurantController import RestaurantController
+from model import Restaurant
+from view.Entry import Entry
+from view.Card import Card
+from view.Session import Session
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,7 +11,6 @@ class RestaurantRegister(ttk.Frame):
     def __init__(self):
         super().__init__()
 
-        self.persistence = RestaurantPersistence()
         self.controller = RestaurantController(self.persistence)
         self.name_entry = Entry("Restaurante")
         self.price = Entry("Preço")
@@ -40,7 +38,7 @@ class RestaurantRegister(ttk.Frame):
         restaurant.set_name(self.name_entry.get_content())
         restaurant.set_operating_time((self.lunch_time_entry.get_content(), self.dinner_time_entry.get_content()))
         restaurant.set_price(float(self.price.get_content()))
-        self.controller.save()
+        self.controller.update(restaurant)
 
         self.lunch_time_entry.clear()
         self.dinner_time_entry.clear()

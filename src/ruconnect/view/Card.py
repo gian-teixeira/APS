@@ -1,4 +1,4 @@
-from model.user import Administrator
+from model.User import Administrator
 import tkinter as tk
 from tkinter import ttk
 

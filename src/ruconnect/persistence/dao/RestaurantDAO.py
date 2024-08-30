@@ -1,6 +1,6 @@
-from persistence import DAO
+from persistence.dao.DAO import DAO
 
-class RestaurantPersistence(DAO):
+class RestaurantDAO(DAO):
     @property
     def filename(self) -> str:
         return "restaurant"

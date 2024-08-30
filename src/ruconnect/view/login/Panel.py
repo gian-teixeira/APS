@@ -1,8 +1,7 @@
-from ruconnect.control.UserController import AdministratorController, StudentController
-from persistence.user import AdministratorPersistence, StudentPersistence
-from view.entry import Entry
-from view.selector import Selector
-from model.user import Administrator
+from control.controller.UserController import AdministratorController, StudentController
+from view.Entry import Entry
+from view.Selector import Selector
+from model.User import Administrator
 from tkinter import Tk, StringVar, ttk, font
         
 class LoginPanel(Tk):
@@ -29,6 +28,8 @@ class LoginPanel(Tk):
         self.enter_callback(user)
 
     def verify(self, search_result):
+        if not isinstance(search_result, list):
+            search_result = [search_result]
         if len(search_result) == 0:
             self.error("Usuário não encontrado")
         elif search_result[0].password != self.password.get_content():
@@ -38,10 +39,10 @@ class LoginPanel(Tk):
 
     def attempt(self):
         match self.type.get_selection():
-            case "Administrador": user_controller = AdministratorController(AdministratorPersistence())
-            case "Estudante": user_controller = StudentController(StudentPersistence())
+            case "Administrador": user_controller = AdministratorController()
+            case "Estudante": user_controller = StudentController()
         
-        search_result = user_controller.search(self.id.get_content()) 
+        search_result = user_controller.read(self.id.get_content()) 
         
         self.verify(search_result)
         

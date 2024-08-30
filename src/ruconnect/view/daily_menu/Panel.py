@@ -1,7 +1,7 @@
-from view.daily_menu.search import DailyMenuSearch
-from view.daily_menu.register import DailyMenuRegister
-from model.session import Session
-from model.user import Administrator
+from view.daily_menu.Search import DailyMenuSearch
+from view.daily_menu.Register import DailyMenuRegister
+from view.Session import Session
+from model.User import Administrator
 
 import tkinter as tk
 from tkinter import ttk, font as tk_font

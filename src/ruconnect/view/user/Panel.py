@@ -1,5 +1,5 @@
-from view.user.register import UserRegister
-from view.user.search import UserSearch
+from view.user.Register import UserRegister
+from view.user.Search import UserSearch
 
 import tkinter as tk
 from tkinter import ttk, font as tk_font

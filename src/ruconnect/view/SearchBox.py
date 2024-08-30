@@ -1,4 +1,4 @@
-from view.entry import Entry
+from view.Entry import Entry
 
 import tkinter as tk
 from tkinter import ttk
@@ -31,7 +31,7 @@ class SearchBox(ttk.Frame):
             search_content.append(content if len(content) else '.*')
         search_content = '/'.join(search_content)
         if(search_content == ''): search_content = None
-        return self.controller.search(search_content)
+        return self.controller.read(search_content)
     
     def entry_values(self):
         return [entry.get_content() for entry in self.entries]

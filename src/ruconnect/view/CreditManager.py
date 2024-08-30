@@ -1,9 +1,9 @@
-from model.user import Student
+from model.User import Student
 from tkinter import ttk
 import tkinter as tk
-from view.entry import Entry
-from ruconnect.control.UserController import StudentController
-from persistence.user import StudentPersistence
+
+from view.Entry import Entry
+from control import StudentController
 
 class CreditManager(ttk.Frame):
     def __init__(self, user, *args, **kwargs):
@@ -39,9 +39,8 @@ class CreditManager(ttk.Frame):
             return
         
         self.error_label.pack_forget()
-        controller = StudentController(StudentPersistence())
-        self.user = controller.search(self.user.id)[0]
+        controller = StudentController()
+        self.user = controller.read(self.user.id)[0]
         self.user.credit += credit_amount
-        controller.delete(self.user.id)
-        controller.save(self.user)
+        controller.update(self.user.id, self.user)
         self.credit_var.set(str(self.user.credit))

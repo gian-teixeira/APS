@@ -1,8 +1,7 @@
-from persistence.edible import EdiblePersistence
-from ruconnect.control.EdibleController import EdibleController
-from view.search_box import SearchBox
-from view.card import Card
-from model.session import Session
+from control.controller.EdibleController import EdibleController
+from view.SearchBox import SearchBox
+from view.Card import Card
+from view.Session import Session
 
 import tkinter as tk
 from tkinter import ttk
@@ -11,13 +10,12 @@ class EdibleSearch(ttk.Frame):
     def __init__(self):
         super().__init__()
 
-        self.persistence = EdiblePersistence()
-        self.controller = EdibleController(self.persistence)
+        self.controller = EdibleController()
         self.card = None
         self.selected_name = ""
         self.right = ttk.Frame(self)
         self.left = ttk.Frame(self)
-        self.search = SearchBox(EdibleController(EdiblePersistence()), ["Alimentos"], 
+        self.search = SearchBox(self.controller, ["Alimentos"], 
                                 tk.SINGLE, self.selection_callback())
         
         self.left.pack(expand = True, side = tk.TOP, padx = 10, pady = 10)

@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 
 class Serializable(ABC):
+    @property
     @abstractmethod
-    def get_id(self) -> str: ...
-
+    def id(self) -> str: ...
+    
     def __eq__(self, other):
-        return self.get_id() == other.get_id()
+        return self.id() == other.get_id()

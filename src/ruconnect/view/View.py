@@ -1,10 +1,10 @@
-from view.edible.panel import EdiblePanel
-from view.daily_menu.panel import DailyMenuPanel
-from view.restaurant.panel import RestaurantPanel
-from view.user.panel import UserPanel
-from model.user import User, Administrator
-from model.session import Session
-from view.user.info import UserInfoDisplay
+from view.edible.Panel import EdiblePanel
+from view.daily_menu.Panel import DailyMenuPanel
+from view.restaurant.Panel import RestaurantPanel
+from view.user.Panel import UserPanel
+from model.User import User, Administrator
+from view.Session import Session
+from view.user.Info import UserInfoDisplay
 
 import tkinter as tk
 from tkinter import ttk

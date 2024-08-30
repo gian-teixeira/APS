@@ -1,9 +1,8 @@
-from persistence.edible import EdiblePersistence
-from ruconnect.control.EdibleController import EdibleController
-from model.edible import Edible
-from model.edible_type import EdibleType
-from view.entry import Entry
-from view.selector import Selector
+from control.controller.EdibleController import EdibleController
+from model.Edible import Edible
+from model.EdibleType import EdibleType
+from view.Entry import Entry
+from view.Selector import Selector
 
 import tkinter as tk
 from tkinter import ttk
@@ -12,8 +11,7 @@ class EdibleRegister(ttk.Frame):
     def __init__(self):
         super().__init__()
 
-        self.persistence = EdiblePersistence()
-        self.controller = EdibleController(self.persistence)
+        self.controller = EdibleController()
         self.error_label = ttk.Label(self, text = "Item já cadastrado", foreground = "red", 
                                      relief = tk.GROOVE, justify = 'center')
         
@@ -36,7 +34,7 @@ class EdibleRegister(ttk.Frame):
 
         self.error_label.pack_forget()
         try:
-            self.controller.save(edible)
+            self.controller.create(edible)
         except Exception as e:
             self.error_label.pack(expand = True)
         else:

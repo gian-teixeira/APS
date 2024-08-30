@@ -1,10 +1,10 @@
-from ruconnect.control.UserController import StudentController, AdministratorController
-from persistence.user import StudentPersistence, AdministratorPersistence
-from view.search_box import SearchBox
-from view.selector import Selector
-from model.user import Administrator, Student
-from view.user.info import UserInfoDisplay
-from model.session import Session
+from view.SearchBox import SearchBox
+from view.Selector import Selector
+from view.user.Info import UserInfoDisplay
+
+from control import StudentController, AdministratorController
+from model.User import Administrator, Student
+from view.Session import Session
 
 import tkinter as tk
 from tkinter import ttk
@@ -22,10 +22,10 @@ class UserSearch(ttk.Frame):
     def type_selection_callback(self, event):
         if self.type_selector.get_selection() == "Administrador":
             self.user_type = Administrator
-            self.controller = AdministratorController(AdministratorPersistence())
+            self.controller = AdministratorController()
         else:
             self.user_type = Student
-            self.controller = StudentController(StudentPersistence())
+            self.controller = StudentController()
         
         if self.search:
             self.search.pack_forget()
@@ -36,7 +36,7 @@ class UserSearch(ttk.Frame):
     
     def search_selection_callback(self, event):
         user_id = self.search.entry_values()[0]
-        user = self.controller.search(user_id)[0]
+        user = self.controller.read(user_id)
 
         if self.selection_card:
             self.selection_card.pack_forget()
