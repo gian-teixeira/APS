@@ -8,21 +8,17 @@ class Controller(ABC):
         json_data = self.linker.to_dict(obj)
         persistence.create(obj.id, json_data)
 
-    def read(self, id : str | None) -> None | Serializable | list[Serializable]:
+    def read(self, id : str | None = None) -> None | list[Serializable]:
         persistence : DAO = self.linker.get_persistence()
         data = persistence.read(id)
         if data is None: return None
-        if isinstance(data, list): 
-            objects = map(self.linker.to_object, data)
-            return list(objects)
-        return self.linker.to_object(data)
+        objects = map(lambda tup : self.linker.to_object(tup[1]), data)
+        return list(objects)
     
     def update(self, obj : Serializable) -> None:
         persistence : DAO = self.linker.get_persistence()
         json_data = self.linker.to_dict(obj)
-        data = persistence.update(obj.id, json_data)
-        objects = map(self.linker.to_object, data)
-        return list(objects)
+        persistence.update(obj.id, json_data)
     
     def delete(self, obj : Serializable) -> None:
         persistence : DAO = self.linker.get_persistence()

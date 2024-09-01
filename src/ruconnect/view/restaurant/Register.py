@@ -55,5 +55,5 @@ class RestaurantRegister(ttk.Frame):
 
         fields = dict(zip(restaurant.attr_labels(), restaurant.to_dict().values()))
 
-        self.card = Card(Session.get_user(), "Restaurante", fields, lambda: ())
+        self.card = Card("Restaurante", fields, lambda: ())
         self.card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)

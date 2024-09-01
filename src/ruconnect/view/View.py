@@ -18,8 +18,8 @@ class View(tk.Tk):
         self.panels = {
             "Comida": (EdiblePanel(), User),
             "Cardápio": (DailyMenuPanel(), User),
-            "Usuário": (UserPanel(), Administrator),
-            "Restaurante": (RestaurantPanel(), Administrator),
+            # "Usuário": (UserPanel(), Administrator),
+            # "Restaurante": (RestaurantPanel(), Administrator),
         }
         self.selected_panel = None
         self.sidebar = ttk.Frame(self)

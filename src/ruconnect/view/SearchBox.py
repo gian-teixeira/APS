@@ -4,34 +4,33 @@ import tkinter as tk
 from tkinter import ttk
 
 class SearchBox(ttk.Frame):
-    def __init__(self, controller, entries, selectmode = tk.MULTIPLE, selection_callback = None):
+    def __init__(self, 
+                 controller,
+                 provider,
+                 entry_label,
+                 selectmode = tk.MULTIPLE, 
+                 selection_callback = None):
         super().__init__()
-        assert(len(entries) > 0)
         
         self.controller = controller
+        self.provider = provider
         self.selectmode = selectmode
         self.select_box = ttk.Frame(self)
         self.update_button = ttk.Button(self, text = 'Atualizar', command = self.update)
         self.listbox = tk.Listbox(self.select_box, selectmode = selectmode, highlightthickness = 0)
         self.scroll = ttk.Scrollbar(self.select_box)
-        self.entries = list()
+        self.entry = Entry(entry_label)
 
-        for label in entries:
-            entry = Entry(label)
-            entry.on_update(self.update)
-            self.entries.append(entry)
+        self.entry.on_update(self.update)
         self.listbox.bind("<<ListboxSelect>>", selection_callback)
         self.listbox.config(yscrollcommand = self.scroll.set)
         self.scroll.config(command = self.listbox.yview)
 
     def search(self):
-        search_content = []
-        for entry in self.entries:
-            content = entry.get_content().strip()
-            search_content.append(content if len(content) else '.*')
-        search_content = '/'.join(search_content)
-        if(search_content == ''): search_content = None
-        return self.controller.read(search_content)
+        id = self.entry.get_content()
+        if id == '': id = None
+        content = self.controller.read(id)
+        return content if content else []
     
     def entry_values(self):
         return [entry.get_content() for entry in self.entries]
@@ -45,11 +44,10 @@ class SearchBox(ttk.Frame):
         self.listbox.delete(0, tk.END)
         for item in self.search():
             if item is None: continue
-            self.listbox.insert(tk.END, str(item))
+            self.listbox.insert(tk.END, self.provider.label(item))
 
     def pack(self, *args, **kwargs):
-        for entry in self.entries:
-            entry.pack(in_ = self, pady = 10, expand = True, fill = tk.X)
+        self.entry.pack(in_ = self, pady = 10, expand = True, fill = tk.X)
         self.listbox.pack(side = tk.LEFT, expand = True, fill = tk.BOTH)
         self.scroll.pack(side = tk.RIGHT, expand = True, fill = tk.Y)
         self.select_box.pack(expand = True, fill = tk.BOTH)

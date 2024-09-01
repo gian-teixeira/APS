@@ -7,12 +7,7 @@ class DAO(ABC):
     data = None
 
     def __init__(self):
-        print(os.getcwd(), f"data/{self.filename}.json")
-        with open(f"data/{self.filename}.json", 'r') as file:
-            content = file.read()
-            try: self.data = json.loads(content)
-            except: self.data = dict()
-            print(self.filename, self.data)
+        self.load()
 
     @classmethod
     def get_instance(cls):
@@ -20,29 +15,47 @@ class DAO(ABC):
             cls.instance = cls()
         return cls.instance
     
-    def close(self):
-        json_data = json.dumps(self.data)
-        with open(self.filename, 'w+') as file:
-            file.write(json_data)
-    
     @property
     @abstractmethod
     def filename(self) -> str: ...
+    
+    def save(self):
+        json_data = json.dumps(self.data)
+        with open(f"data/{self.filename}.json", 'w+') as file:
+            file.write(json_data)
 
-    def read(self, id : str | None) -> None | dict | list[dict]:
-        return self.data.get(id, None)
+    def load(self):
+        try:
+            with open(f"data/{self.filename}.json", 'r') as file:
+                self.data = json.load(file)
+        except: 
+            self.data = dict()
+
+
+    def read(self, id : str | None = None) -> None | list[tuple[str,dict]]:
+        self.load()
+        if id is None:
+            return list(self.data.items())
+        if not id in self.data: return None
+        return [(id, self.data.get(id))]
 
     def create(self, id : str, data : dict) -> None:
-        if self.data.get(id, None) is not None: 
+        self.load()
+        if id in self.data:
             raise Exception(f"{self.filename} : ID already present.")
         self.data[id] = data
+        self.save()
     
     def update(self, id : str, data : dict) -> None:
-        if self.data.get(id, None) is None:
+        self.load()
+        if not id in self.data:
             raise Exception(f"{self.filename} : ID not present.")
-        return self.data[id]
+        self.data[id] = data
+        self.save()
     
     def delete(self, id : str) -> None:
-        if self.data.get(id, None) is None:
-            raise Exception(f"{self.filename} : ID not present.")
+        self.load()
+        if not id in self.data:
+            raise Exception("Delete : ID not present.")
         del self.data[id]
+        self.save()

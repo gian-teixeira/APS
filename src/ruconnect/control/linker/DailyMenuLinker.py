@@ -6,10 +6,10 @@ from persistence import DailyMenuDAO
 class DailyMenuLinker(Linker):
     def to_dict(self, obj : DailyMenu) -> dict:
         return {
-            "price": self.price,
-            "date": self.date,
-            "lunch": [edible.get_id() for edible in self.lunch],
-            "dinner": [edible.get_id() for edible in self.dinner],
+            "price": obj.price,
+            "date": obj.date,
+            "lunch": [edible.id for edible in obj.lunch],
+            "dinner": [edible.id for edible in obj.dinner],
         }
 
     def to_object(self, data : dict) -> DailyMenu:

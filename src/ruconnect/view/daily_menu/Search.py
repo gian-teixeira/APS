@@ -3,6 +3,7 @@ from view.Entry import Entry
 from view.Card import Card
 from view.SearchBox import SearchBox
 from view.Session import Session
+from view.provider.DailyMenuProvider import DailyMenuProvider
 
 import tkinter as tk
 from tkinter import ttk
@@ -19,36 +20,28 @@ class DailyMenuSearch(ttk.Frame):
         self.right = ttk.Frame(self)
         self.left = ttk.Frame(self)
         self.date_entry = Entry("Data")
-        self.search = SearchBox(self.controller, ["Data"])
-
-    def confirm(self):
-        date = self.date_entry.get_content()
-        self.search_result = self.controller.search(date)
-        self.response_list.delete(0, tk.END)
-        for value in self.search_result:
-            self.response_list.insert(tk.END, str(value))
+        self.search = SearchBox(
+            self.controller, 
+            DailyMenuProvider,
+            "Data",
+            tk.SINGLE,
+            self.selection_callback())
 
     def delete(self):
-        self.controller.delete(self.selected_date)
-        self.confirm()
+        self.controller.delete(self.selected)
+        self.search.update()
 
     def selection_callback(self):
         def callback(event):
-            widget = event.widget
-
-            if len(widget.curselection()) == 0:
+            if len(self.search.curselection()) == 0: 
                 return
             
-            index = int(widget.curselection()[0])
-            self.selected_date = widget.get(index)
-            selected = self.search_result[index]
+            self.selected = self.search.curselection()[0]
             
             if self.card is not None:
                 self.card.destroy()
-
-            fields = dict(zip(selected.attr_labels(), selected.to_dict().values()))
-
-            card = Card(Session.get_user(), "Cardápio do dia", fields, self.delete)
+            
+            card = Card(DailyMenuProvider, self.selected, self.delete)
             card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)
             self.card = card
 

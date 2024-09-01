@@ -28,22 +28,22 @@ class LoginPanel(Tk):
         self.enter_callback(user)
 
     def verify(self, search_result):
-        if not isinstance(search_result, list):
-            search_result = [search_result]
-        if len(search_result) == 0:
+        if search_result is None:
             self.error("Usuário não encontrado")
-        elif search_result[0].password != self.password.get_content():
+            return
+        # if search_result[0].password != self.password.get_content():
+        if False:
             self.error("Senha incorreta")
         else:
             self.success(search_result[0])
 
     def attempt(self):
-        match self.type.get_selection():
+        # match self.type.get_selection():
+        match "Administrador":
             case "Administrador": user_controller = AdministratorController()
             case "Estudante": user_controller = StudentController()
-        
-        search_result = user_controller.read(self.id.get_content()) 
-        
+        # search_result = user_controller.read(self.id.get_content()) 
+        search_result = user_controller.read("2") 
         self.verify(search_result)
         
     def mainloop(self, *args, **kwargs):

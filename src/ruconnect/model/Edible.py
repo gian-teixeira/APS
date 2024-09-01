@@ -9,5 +9,5 @@ class Edible(Serializable):
 
     @property
     def id(self) -> str:
-        return self.name + self.type + str(self.calories)
+        return self.name
      

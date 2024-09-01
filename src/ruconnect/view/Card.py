@@ -1,19 +1,21 @@
 from model.User import Administrator
+from view.Session import Session
 import tkinter as tk
 from tkinter import ttk
 
 class Card(ttk.Frame):
-    def __init__(self, user, title_name, data, delete_callback):
+    def __init__(self, provider, item, delete_callback):
         super().__init__(relief = tk.GROOVE)
         self.delete_callback = delete_callback
-
-        title = ttk.Label(self, text = title_name, font = ('Helvetic 10 bold'))
+        
+        user = Session.get_user()
+        title = ttk.Label(self, text = provider.label(item), font = ('Helvetic 10 bold'))
         title.pack(expand = True)
         
-        for key in data:
+        for key,value in provider.info(item):
             line = ttk.Frame(self)
             label = ttk.Label(line, text = f"{key} : ", font = ('Helvetic 10 normal'))
-            value = ttk.Label(line, text = str(data[key]), font = ('Helvetic 10 italic'))
+            value = ttk.Label(line, text = str(value), font = ('Helvetic 10 italic'))
 
             label.pack(expand = True, side = tk.LEFT)
             value.pack(expand = True, side = tk.RIGHT)
