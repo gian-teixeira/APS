@@ -31,19 +31,16 @@ class LoginPanel(Tk):
         if search_result is None:
             self.error("Usuário não encontrado")
             return
-        # if search_result[0].password != self.password.get_content():
-        if False:
+        if str(search_result[0].password) != self.password.get_content():
             self.error("Senha incorreta")
         else:
             self.success(search_result[0])
 
     def attempt(self):
-        # match self.type.get_selection():
-        match "Administrador":
+        match self.type.get_selection():
             case "Administrador": user_controller = AdministratorController()
             case "Estudante": user_controller = StudentController()
-        # search_result = user_controller.read(self.id.get_content()) 
-        search_result = user_controller.read("2") 
+        search_result = user_controller.read(self.id.get_content()) 
         self.verify(search_result)
         
     def mainloop(self, *args, **kwargs):

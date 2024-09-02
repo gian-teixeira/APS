@@ -1,9 +1,9 @@
 from view.SearchBox import SearchBox
 from view.Selector import Selector
 from view.user.Info import UserInfoDisplay
-
+from view.provider.UserProvider import AdministratorProvider, StudentProvider
 from control import StudentController, AdministratorController
-from model.User import Administrator, Student
+from model import Administrator, Student
 from view.Session import Session
 
 import tkinter as tk
@@ -23,20 +23,23 @@ class UserSearch(ttk.Frame):
         if self.type_selector.get_selection() == "Administrador":
             self.user_type = Administrator
             self.controller = AdministratorController()
+            self.provider = AdministratorProvider()
         else:
             self.user_type = Student
             self.controller = StudentController()
+            self.provider = StudentProvider()
         
-        if self.search:
-            self.search.pack_forget()
-        self.search = SearchBox(self.controller, ["Id"], tk.SINGLE,
-                                self.search_selection_callback)
+        if self.search: self.search.pack_forget()
+        self.search = SearchBox(
+            self.controller, self.provider, 
+            ["CPF"], tk.SINGLE,
+            self.search_selection_callback)
         
         self.search.pack(in_ = self)
     
     def search_selection_callback(self, event):
-        user_id = self.search.entry_values()[0]
-        user = self.controller.read(user_id)
+        user = self.search.curselection()[0]
+        user = self.controller.read(user.id)
 
         if self.selection_card:
             self.selection_card.pack_forget()
@@ -51,7 +54,7 @@ class UserSearch(ttk.Frame):
         self.selection_card.pack()
     
     def delete_selection_callback(self):
-        user_id = self.search.entry_values()[0]
+        user_id = self.search.entry_value()[0]
         self.controller.delete(user_id)
         self.selection_card.pack_forget()
         self.search.update()
@@ -60,32 +63,3 @@ class UserSearch(ttk.Frame):
         self.type_selector.pack(in_ = self)
         self.type_selection_callback(None)
         super().pack(*args, **kwargs)
-    
-    '''def confirm(self):
-        edible_name = self.entry.get_content()
-        self.search_result = self.controller.search_by_name(edible_name)
-        self.response_list.delete(0, tk.END)
-        for value in self.search_result:
-            self.response_list.insert(tk.END, str(value))
-
-    def delete(self):
-        self.controller.delete_by_name(self.selected_name)
-        self.confirm()
-
-    def selection_callback(self):
-        def callback(event):
-            selected = self.search.curselection()
-
-            if len(selected) == 0: return
-            selected = selected[0]
-
-            if self.card is not None:
-                self.card.destroy()
-
-            fields = dict(zip(selected.attr_labels(), selected.to_dict().values()))
-
-            card = Card("Comida", fields, self.delete)
-            card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)
-            self.card = card
-
-        return callback'''

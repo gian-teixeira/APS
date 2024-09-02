@@ -23,7 +23,7 @@ class DailyMenuSearch(ttk.Frame):
         self.search = SearchBox(
             self.controller, 
             DailyMenuProvider,
-            "Data",
+            ["Data"],
             tk.SINGLE,
             self.selection_callback())
 

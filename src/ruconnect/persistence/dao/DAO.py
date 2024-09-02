@@ -30,6 +30,7 @@ class DAO(ABC):
                 self.data = json.load(file)
         except: 
             self.data = dict()
+            self.save()
 
 
     def read(self, id : str | None = None) -> None | list[tuple[str,dict]]:

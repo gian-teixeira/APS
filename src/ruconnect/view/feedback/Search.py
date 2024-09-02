@@ -1,24 +1,24 @@
-from control.controller.EdibleController import EdibleController
+from control.controller.FeedbackController import FeedbackController
 from view.SearchBox import SearchBox
 from view.Card import Card
 from view.Session import Session
-from view.provider.EdibleProvider import EdibleProvider
+from view.provider.FeedbackProvider import FeedbackProvider
 
 import tkinter as tk
 from tkinter import ttk
 
-class EdibleSearch(ttk.Frame):
+class FeedbackSearch(ttk.Frame):
     def __init__(self):
         super().__init__()
 
-        self.controller = EdibleController()
+        self.controller = FeedbackController()
         self.card = None
         self.selected_name = None
         self.right = ttk.Frame(self)
         self.left = ttk.Frame(self)
         self.search = SearchBox(
-            self.controller, EdibleProvider,
-            ["Alimentos"], tk.SINGLE, self.selection_callback())
+            self.controller, FeedbackProvider,
+            ["Id", "Data", "Período"], tk.SINGLE, self.selection_callback())
         
         self.left.pack(expand = True, side = tk.TOP, padx = 10, pady = 10)
         self.right.pack(expand = True, side = tk.BOTTOM, padx = 10, pady = 10)
@@ -38,7 +38,7 @@ class EdibleSearch(ttk.Frame):
             if self.card is not None:
                 self.card.destroy()
             
-            card = Card(EdibleProvider, self.selected, self.delete)
+            card = Card(FeedbackProvider, self.selected, self.delete)
             card.pack(in_ = self.right, expand = True, ipadx = 10, ipady = 10)
             self.card = card
 

@@ -1,9 +1,18 @@
-class Feedback:
-    def __init__(self, star_rating : int, written_rating : str, date_menu : str, period_menu : str, id_rater : str):
+from persistence import Serializable
+
+class Feedback(Serializable):
+    def __init__(self,
+                 star_rating : int, 
+                 written_rating : str, 
+                 menu_date : str, 
+                 menu_period : str,
+                 id_rater : str):
         self.star_rating = star_rating
         self.written_rating = written_rating
-        self.id_menu = f'{date_menu} - {period_menu}'
+        self.menu_date = menu_date
+        self.menu_period = menu_period
         self.id_rater = id_rater
 
-    def get_id(self) -> str:
-        return self.id_rater + self.id_menu
+    @property
+    def id(self) -> str:
+        return f"{self.id_rater} {self.menu_date} {self.menu_period}"

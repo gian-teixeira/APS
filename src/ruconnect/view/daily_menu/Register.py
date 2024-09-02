@@ -28,7 +28,7 @@ class DailyMenuRegister(ttk.Frame):
         self.period_selector = Selector("Período", ["Almoço", "Jantar"])
         self.edible_search = SearchBox(
             self.edible_controller, EdibleProvider,
-            "Alimentos", tk.MULTIPLE)
+            ["Alimentos"], tk.MULTIPLE)
         self.button = ttk.Button(self.left, text = "Registrar", command = self.confirm)
 
     def confirm(self):

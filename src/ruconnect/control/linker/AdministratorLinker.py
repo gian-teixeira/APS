@@ -11,7 +11,6 @@ class AdministratorLinker(Linker):
         }
         
     def to_object(self, data : dict) -> Administrator:
-        print("to_object : ", data)
         return Administrator(data["name"], data["cpf"], data["password"])
     
     def get_persistence(self):

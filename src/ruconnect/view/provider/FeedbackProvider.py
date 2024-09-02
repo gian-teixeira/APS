@@ -11,6 +11,6 @@ class FeedbackProvider(Provider):
         return (
             ("Estrelas",  obj.star_rating),
             ("Comentário",  obj.written_rating),
-            ("ID do Menu",  obj.id_menu),
-            ("CPF",  obj.cpf)
+            ("Data",  obj.menu_date),
+            ("Período",  obj.menu_period)
         )

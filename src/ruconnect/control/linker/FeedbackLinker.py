@@ -7,12 +7,15 @@ class FeedbackLinker(Linker):
         return {
             "star_rating" : obj.star_rating,
             "written_rating" : obj.written_rating,
-            "id_menu" : obj.id_menu,
-            "id_rater" : obj.cpf,
+            "menu_date" : obj.menu_date,
+            "menu_period" : obj.menu_period,
+            "id_rater" : obj.id_rater,
         }
 
     def to_object(self, data : dict) -> Feedback:
-        return Feedback(data["star_rating"], data["written_rating"], data["id_menu"], data["id_rater"])
+        return Feedback(data["star_rating"], 
+            data["written_rating"], data["menu_date"],
+            data["menu_period"], data["id_rater"])
     
     def get_persistence(self):
         return FeedbackDAO.get_instance()

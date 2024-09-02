@@ -12,8 +12,8 @@ class RestaurantLinker(Linker):
     
     def to_object(self, data : dict) -> Restaurant:
         instance = Restaurant.get_instance()
+        instance.name = data["name"]
         instance.price = data["price"]
-        instance.name = data["price"]
         instance.operating_time = data["operating_time"]
         return instance
     

@@ -2,6 +2,7 @@ from view.edible.Panel import EdiblePanel
 from view.daily_menu.Panel import DailyMenuPanel
 from view.restaurant.Panel import RestaurantPanel
 from view.user.Panel import UserPanel
+from view.feedback.Panel import FeedbackPanel
 from model.User import User, Administrator
 from view.Session import Session
 from view.user.Info import UserInfoDisplay
@@ -18,8 +19,9 @@ class View(tk.Tk):
         self.panels = {
             "Comida": (EdiblePanel(), User),
             "Cardápio": (DailyMenuPanel(), User),
-            # "Usuário": (UserPanel(), Administrator),
-            # "Restaurante": (RestaurantPanel(), Administrator),
+            "Usuário": (UserPanel(), Administrator),
+            "Feedback": (FeedbackPanel(), User),
+            "Restaurante": (RestaurantPanel(), Administrator),
         }
         self.selected_panel = None
         self.sidebar = ttk.Frame(self)
