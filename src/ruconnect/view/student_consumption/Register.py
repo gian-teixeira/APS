@@ -37,6 +37,9 @@ class StudentConsumptionRegister(ttk.Frame):
         self.confirm_button.pack(pady = 10)
 
     def confirm(self):
+        self.error_label["unknown menu"].pack_forget()
+        self.error_label["unknown user"].pack_forget()
+        
         menu_controller = DailyMenuController()
         consumption_controller = StudentConsumptionController()
         student_controller = StudentController()
@@ -65,9 +68,8 @@ class StudentConsumptionRegister(ttk.Frame):
             consumption.spent_credits += 1
             consumption.days_attended += [(date,period)]
             consumption_controller.update(consumption)
+        student.credit += 1
 
-        self.error_label["unknown menu"].pack_forget()
-        self.error_label["unknown user"].pack_forget()
         self.date_menu_entry.clear()
         self.period_selector.clear()
         self.student_id_entry.clear()
