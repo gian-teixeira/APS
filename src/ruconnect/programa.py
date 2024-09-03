@@ -1,4 +1,3 @@
-from persistence.Persistence import Persistence
 from view.login.Panel import LoginPanel
 from view.View import View
 from view.Session import Session
@@ -17,7 +16,6 @@ class Programa:
 
     @classmethod
     def main(cls):
-        Persistence.set_database_folder("./data")
         cls.display = LoginPanel(cls.login)
         if len(argv) > 1:
             cls.display.enter(force = True)
