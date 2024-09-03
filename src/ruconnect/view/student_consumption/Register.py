@@ -15,6 +15,9 @@ class StudentConsumptionRegister(ttk.Frame):
         self.error_label = {
             "unknown menu" : ttk.Label(self, 
                 text = "Cardápio não encontrado", foreground = "red",
+                relief = tk.GROOVE, justify = 'center'),
+            "unknown user" : ttk.Label(self, 
+                text = "Aluno não encontrado", foreground = "red",
                 relief = tk.GROOVE, justify = 'center')
         }
         
@@ -39,10 +42,15 @@ class StudentConsumptionRegister(ttk.Frame):
         student_controller = StudentController()
 
         date = self.date_menu_entry.get_content()
-        
-        try:
-            menu_controller.read(date)
-        except:
+        student_id = self.student_id_entry.get_content()
+        menu = menu_controller.read(date)
+        student = student_controller.read()
+
+        if not student:
+            self.error_label["unknown user"].pack(expand = True)
+            return
+
+        if not menu:
             self.error_label["unknown menu"].pack(expand = True)
             return
         
@@ -59,6 +67,7 @@ class StudentConsumptionRegister(ttk.Frame):
             consumption_controller.update(consumption)
 
         self.error_label["unknown menu"].pack_forget()
+        self.error_label["unknown user"].pack_forget()
         self.date_menu_entry.clear()
         self.period_selector.clear()
         self.student_id_entry.clear()
