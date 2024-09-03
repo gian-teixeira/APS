@@ -38,17 +38,18 @@ class UserSearch(ttk.Frame):
         self.search.pack(in_ = self)
     
     def search_selection_callback(self, event):
-        user = self.search.curselection()[0]
-        user = self.controller.read(user.id)[0]
+        selection = self.search.curselection()
+        if selection is None:
+            return
+        user = selection[0]
 
         if self.selection_card:
             self.selection_card.pack_forget()
         self.selection_card = ttk.Frame(self)
         self.user_info = UserInfoDisplay(user, self.selection_card)
         self.delete_button = ttk.Button(self.selection_card,
-                                        text = "Delete",
-                                        command = self.delete_selection_callback)
-
+            text = "Apagar", command = self.delete_selection_callback)
+        
         self.user_info.pack()
         self.delete_button.pack()
         self.selection_card.pack()
