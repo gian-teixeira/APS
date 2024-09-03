@@ -18,6 +18,9 @@ class StudentConsumptionRegister(ttk.Frame):
                 relief = tk.GROOVE, justify = 'center'),
             "unknown user" : ttk.Label(self, 
                 text = "Aluno não encontrado", foreground = "red",
+                relief = tk.GROOVE, justify = 'center'),
+            "no credit" : ttk.Label(self, 
+                text = "Crédito insuficiente", foreground = "red",
                 relief = tk.GROOVE, justify = 'center')
         }
         
@@ -39,6 +42,7 @@ class StudentConsumptionRegister(ttk.Frame):
     def confirm(self):
         self.error_label["unknown menu"].pack_forget()
         self.error_label["unknown user"].pack_forget()
+        self.error_label["no credit"].pack_forget()
         
         menu_controller = DailyMenuController()
         consumption_controller = StudentConsumptionController()
@@ -59,6 +63,11 @@ class StudentConsumptionRegister(ttk.Frame):
         
         period = self.period_selector.get_selection()
         student = student_controller.read(self.student_id_entry.get_content())[0]
+
+        if student.credit == 0:
+            self.error_label["no credit"].pack(expand = True)
+            return
+
         consumption = consumption_controller.read(student.id)
         if not consumption:
             consumption = StudentConsumption(student.id, 1, [(date,period)])
