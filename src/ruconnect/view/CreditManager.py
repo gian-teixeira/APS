@@ -20,8 +20,8 @@ class CreditManager(ttk.Frame):
         self.credit_var.set(user.credit)
 
         self.error_label = tk.Label(self, fg = 'red', wraplength = 200,
-                                    text = 'Valor inválido. Insira um inteiro positivo!')
-
+            text = 'Valor inválido. Insira um inteiro positivo!')
+    
     def pack(self, *args, **kwargs):
         self.credit_text.pack(side = tk.LEFT)
         self.credit_value.pack(side = tk.RIGHT)
@@ -42,5 +42,5 @@ class CreditManager(ttk.Frame):
         controller = StudentController()
         self.user = controller.read(self.user.id)[0]
         self.user.credit += credit_amount
-        controller.update(self.user.id, self.user)
+        controller.update(self.user)
         self.credit_var.set(str(self.user.credit))

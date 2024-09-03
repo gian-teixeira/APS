@@ -9,7 +9,7 @@ class FeedbackLinker(Linker):
             "written_rating" : obj.written_rating,
             "menu_date" : obj.menu_date,
             "menu_period" : obj.menu_period,
-            "id_rater" : obj.id_rater,
+            "id_rater" : obj.rater_id,
         }
 
     def to_object(self, data : dict) -> Feedback:

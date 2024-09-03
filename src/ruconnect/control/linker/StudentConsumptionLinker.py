@@ -2,7 +2,7 @@ from control.linker.Linker import Linker
 from model import StudentConsumption
 from persistence import StudentConsumptionDAO
 
-class RestaurantLinker(Linker):
+class StudentConsumptionLinker(Linker):
     def to_dict(self, obj : StudentConsumption) -> dict:
         return {
             "student_id" : obj.student_id,

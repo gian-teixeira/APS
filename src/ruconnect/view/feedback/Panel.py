@@ -1,10 +1,12 @@
 from view.feedback.Search import FeedbackSearch
 from view.feedback.Register import FeedbackRegister
+from view.feedback.BestMenu import FeedbackBestMenu
 from view.Session import Session
 from model.User import Administrator, Student
 
 import tkinter as tk
 from tkinter import ttk, font as tk_font
+from functools import partial
         
 class FeedbackPanel(tk.Frame):
     def __init__(self):
@@ -31,6 +33,22 @@ class FeedbackPanel(tk.Frame):
             register.pack(in_ = self.register_frame, expand = True, anchor = 'n')
             self.register_frame.pack(expand = True, fill = tk.BOTH)
 
+        tabs["Melhor cardápio"] = ttk.Frame(self.tab_controller)
+        self.tab_controller.add(tabs["Melhor cardápio"], text = "Melhor cardápio")
+        self.best_menu_frame = ttk.Frame(tabs["Melhor cardápio"])
+        self.best_menu = FeedbackBestMenu()
+        self.best_menu.pack(in_ = self.best_menu_frame, expand = True, anchor = 'n')
+        self.best_menu_frame.pack(expand = True, fill = tk.BOTH)
+
+        self.tab_controller.bind(
+            "<<NotebookTabChanged>>", 
+            partial(self.update,self))
+
         self.title.pack(fill = tk.BOTH)
         self.sep.pack(fill = tk.X)
         self.tab_controller.pack(expand = True, fill = tk.BOTH)
+
+    @staticmethod
+    def update(self, event):
+        _ = event
+        self.best_menu.update()

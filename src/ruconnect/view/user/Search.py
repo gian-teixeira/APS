@@ -39,7 +39,7 @@ class UserSearch(ttk.Frame):
     
     def search_selection_callback(self, event):
         user = self.search.curselection()[0]
-        user = self.controller.read(user.id)
+        user = self.controller.read(user.id)[0]
 
         if self.selection_card:
             self.selection_card.pack_forget()
@@ -54,7 +54,7 @@ class UserSearch(ttk.Frame):
         self.selection_card.pack()
     
     def delete_selection_callback(self):
-        user_id = self.search.entry_value()[0]
+        user_id = self.search.curselection()[0]
         self.controller.delete(user_id)
         self.selection_card.pack_forget()
         self.search.update()

@@ -3,6 +3,7 @@ from view.daily_menu.Panel import DailyMenuPanel
 from view.restaurant.Panel import RestaurantPanel
 from view.user.Panel import UserPanel
 from view.feedback.Panel import FeedbackPanel
+from view.student_consumption.Panel import StudentConsumptionPanel
 from model.User import User, Administrator
 from view.Session import Session
 from view.user.Info import UserInfoDisplay
@@ -21,6 +22,7 @@ class View(tk.Tk):
             "Cardápio": (DailyMenuPanel(), User),
             "Usuário": (UserPanel(), Administrator),
             "Feedback": (FeedbackPanel(), User),
+            "Registro de consumo": (StudentConsumptionPanel(), User),
             "Restaurante": (RestaurantPanel(), Administrator),
         }
         self.selected_panel = None
@@ -28,6 +30,7 @@ class View(tk.Tk):
         
         ttk.Label(self.sidebar, text = "RUConnect").pack(anchor = "n")
         user = Session.get_user()
+        print(type(user))
 
         self.user_area = UserInfoDisplay(user, self.sidebar)
         self.user_area.pack(pady = 10)

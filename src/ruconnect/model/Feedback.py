@@ -6,13 +6,13 @@ class Feedback(Serializable):
                  written_rating : str, 
                  menu_date : str, 
                  menu_period : str,
-                 id_rater : str):
+                 rater_id : str):
         self.star_rating = star_rating
         self.written_rating = written_rating
         self.menu_date = menu_date
         self.menu_period = menu_period
-        self.id_rater = id_rater
+        self.rater_id = rater_id
 
     @property
     def id(self) -> str:
-        return f"{self.id_rater} {self.menu_date} {self.menu_period}"
+        return f"{self.rater_id} {self.menu_date} {self.menu_period}"

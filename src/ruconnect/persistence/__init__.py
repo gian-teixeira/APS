@@ -5,6 +5,7 @@ from persistence.dao.EdibleDAO import EdibleDAO
 from persistence.dao.RestaurantDAO import RestaurantDAO
 from persistence.dao.FeedbackDAO import FeedbackDAO
 from persistence.dao.UserDAO import AdministratorDAO, StudentDAO
+from persistence.dao.StudentConsumptionDAO import StudentConsumptionDAO
 
 # ...
 from persistence.Serializable import Serializable

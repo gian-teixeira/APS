@@ -20,3 +20,7 @@ class Entry(tk.Frame):
  
     def on_update(self, func):
         self.content.trace_add('write', func)
+
+    def set(self, value):
+        self.entry.delete(0,tk.END)
+        self.entry.insert(0,value)

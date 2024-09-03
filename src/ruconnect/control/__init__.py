@@ -4,3 +4,4 @@ from control.controller.EdibleController import EdibleController
 from control.controller.FeedbackController import FeedbackController
 from control.controller.RestaurantController import RestaurantController
 from control.controller.UserController import StudentController, AdministratorController
+from control.controller.StudentConsumptionController import StudentConsumptionController
