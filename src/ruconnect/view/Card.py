@@ -4,7 +4,11 @@ import tkinter as tk
 from tkinter import ttk
 
 class Card(ttk.Frame):
-    def __init__(self, provider, item, delete_callback):
+    def __init__(self, 
+                 provider, 
+                 item, 
+                 delete_callback, 
+                 deleter_type = Administrator):
         super().__init__(relief = tk.GROOVE)
         self.delete_callback = delete_callback
         
@@ -21,7 +25,7 @@ class Card(ttk.Frame):
             value.pack(expand = True, side = tk.RIGHT)
             line.pack(expand = True)
 
-        if isinstance(user, Administrator):
+        if isinstance(user, deleter_type):
             delete_button = ttk.Button(self, text = "Apagar", command = self.__delete)
             delete_button.pack(pady = 10)
 

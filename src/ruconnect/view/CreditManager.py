@@ -16,7 +16,13 @@ class CreditManager(ttk.Frame):
         self.credit_text = ttk.Label(self.credit_frame, text = f'Créditos :')
         self.credit_value = ttk.Label(self.credit_frame, textvariable = self.credit_var)
         self.credits_entry = Entry("Comprar créditos")
-        self.button = ttk.Button(self, text = 'Adicionar', command = self.compute_credits)
+        self.button_area = ttk.Frame(self)
+        self.button = ttk.Button(self.button_area, 
+            text = 'Adicionar', 
+            command = self.compute_credits)
+        self.update_button = ttk.Button(self.button_area, 
+            text = "↺", command = self.update_credits,
+            width = 2)
         self.credit_var.set(user.credit)
 
         self.error_label = tk.Label(self, fg = 'red', wraplength = 200,
@@ -27,7 +33,9 @@ class CreditManager(ttk.Frame):
         self.credit_value.pack(side = tk.RIGHT)
         self.credit_frame.pack(anchor = 'w')
         self.credits_entry.pack(in_ = self)
-        self.button.pack(in_ = self, anchor = 'w', pady = 10)
+        self.button_area.pack()
+        self.button.pack(expand = True, anchor = 'w', pady = 10, side = tk.LEFT)
+        self.update_button.pack(anchor = 'e', side = tk.RIGHT)
         super().pack(*args, **kwargs)
 
     def compute_credits(self):
@@ -42,5 +50,11 @@ class CreditManager(ttk.Frame):
         controller = StudentController()
         self.user = controller.read(self.user.id)[0]
         self.user.credit += credit_amount
+        controller.update(self.user)
+        self.credit_var.set(str(self.user.credit))
+
+    def update_credits(self):
+        controller = StudentController()
+        self.user = controller.read(self.user.id)[0]
         controller.update(self.user)
         self.credit_var.set(str(self.user.credit))
