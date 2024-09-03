@@ -68,7 +68,7 @@ class StudentConsumptionRegister(ttk.Frame):
             consumption.spent_credits += 1
             consumption.days_attended += [(date,period)]
             consumption_controller.update(consumption)
-        student.credit += 1
+        student.credit -= 1
         student_controller.update(student)
 
         self.date_menu_entry.clear()
