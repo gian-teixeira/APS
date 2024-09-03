@@ -39,7 +39,7 @@ class UserSearch(ttk.Frame):
     
     def search_selection_callback(self, event):
         selection = self.search.curselection()
-        if selection is None:
+        if selection is None or len(selection) == 0:
             return
         user = selection[0]
 
