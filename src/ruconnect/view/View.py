@@ -30,7 +30,6 @@ class View(tk.Tk):
         
         ttk.Label(self.sidebar, text = "RUConnect").pack(anchor = "n")
         user = Session.get_user()
-        print(type(user))
 
         self.user_area = UserInfoDisplay(user, self.sidebar)
         self.user_area.pack(pady = 10)

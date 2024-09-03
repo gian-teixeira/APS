@@ -6,7 +6,6 @@ class StudentConsumptionProvider(Provider):
         return obj.id
     
     def info(obj: StudentConsumption) -> tuple[tuple[str,str]]:
-        print(obj.days_attended)
         return (
             ('ID do Estudante', obj.student_id),
             ('Créditos Gastos', obj.spent_credits),

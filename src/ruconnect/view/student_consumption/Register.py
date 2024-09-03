@@ -44,7 +44,7 @@ class StudentConsumptionRegister(ttk.Frame):
         date = self.date_menu_entry.get_content()
         student_id = self.student_id_entry.get_content()
         menu = menu_controller.read(date)
-        student = student_controller.read()
+        student = student_controller.read(student_id)
 
         if not student:
             self.error_label["unknown user"].pack(expand = True)
